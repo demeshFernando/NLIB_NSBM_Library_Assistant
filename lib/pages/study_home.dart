@@ -17,6 +17,7 @@ class _studyHomeState extends State<studyHome> {
   TextEditingController _hourcontroller = TextEditingController();
   TextEditingController _minutecontroller = TextEditingController();
   List<bool> _selections = List.generate(2, (index) => false);
+  bool isAM = true; //**  AM/PM button , if AM selected this is true  **//
   @override
   Widget build(BuildContext context) {
     Wakelock.enable();
@@ -101,7 +102,9 @@ class _studyHomeState extends State<studyHome> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // RESERVE text button function //
+                                    },
                                     child: Text(
                                       'RESERVE',
                                       style: GoogleFonts.roboto(
@@ -133,7 +136,7 @@ class _studyHomeState extends State<studyHome> {
                             ],
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 20,top: 40),
+                            padding: const EdgeInsets.only(left: 20, top: 40),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,32 +187,80 @@ class _studyHomeState extends State<studyHome> {
                                       child: Column(
                                         children: [
                                           ToggleButtons(
-                                              isSelected: _selections,
-                                              onPressed: (int index){
-                                                setState(() {
-                                                  for (int buttonIndex = 0; buttonIndex < _selections.length; buttonIndex++) {
-                                  if (buttonIndex == index) {
-                                  _selections[buttonIndex] = true;
-                                  } else {
-                                  _selections[buttonIndex] = false;
-                                  }
-
-                                  );
-                                              },
-
-                                              fillColor: HexColor('#BBECEA'),
-                                              direction: Axis.vertical,
-                                              borderWidth: 1,
-                                              borderColor: HexColor('#44483E'),
-                                              borderRadius: const BorderRadius.all(
-                                                Radius.circular(12),
-                                              ),
-                                              children: const [
-                                                Text('AM'),
-                                                Text('PM')
-                                              ])
+                                            isSelected: _selections,
+                                            onPressed: (int index) {
+                                              setState(() {
+                                                for (int buttonIndex = 0;
+                                                    buttonIndex <
+                                                        _selections.length;
+                                                    buttonIndex++) {
+                                                  if (buttonIndex == index) {
+                                                    _selections[buttonIndex] =
+                                                        true;
+                                                    if (index == 0) {
+                                                      isAM = true;
+                                                    } else {
+                                                      isAM = false;
+                                                    }
+                                                  } else {
+                                                    _selections[buttonIndex] =
+                                                        false;
+                                                  }
+                                                }
+                                              });
+                                            },
+                                            fillColor: HexColor('#BBECEA'),
+                                            direction: Axis.vertical,
+                                            borderWidth: 1,
+                                            borderColor: HexColor('#44483E'),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(12),
+                                            ),
+                                            children: const [
+                                              Text('AM'),
+                                              Text('PM')
+                                            ],
+                                          )
                                         ],
                                       ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+
+                                              // ** Reset textbutton function **//
+
+
+                                            },
+                                            child: Text(
+                                              'Reset',
+                                              style: GoogleFonts.roboto(
+                                                  color: HexColor('#356B07'),
+                                                  fontSize: 15),
+                                            )),TextButton(
+                                            onPressed: () {
+
+                                              // ** Reset textbutton function **//
+
+
+                                            },
+                                            child: Text(
+                                              'Ok',
+                                              style: GoogleFonts.roboto(
+                                                  color: HexColor('#356B07'),
+                                                  fontSize: 15),
+                                            )),
+
+                                      ],
                                     )
                                   ],
                                 )
