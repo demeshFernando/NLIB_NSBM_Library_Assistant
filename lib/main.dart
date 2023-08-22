@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:study_room/pages/study_home.dart';
+import 'package:study_room/pages/study_Home.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Wakelock.enable();
-    return const MaterialApp(
+    return MaterialApp(
 
       debugShowCheckedModeBanner: false,
       home: studyHome(),

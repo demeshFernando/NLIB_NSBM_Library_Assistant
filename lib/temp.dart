@@ -23,7 +23,7 @@ Container(
     children: [
       Padding(
         padding: EdgeInsets.all(8.0),
-        child: Image(image: AssetImage('assets/hometop.png')),
+        child: Image(image: AssetImage('assets/hometop.jpg')),
       )
     ],
   ),
