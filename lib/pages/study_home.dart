@@ -21,8 +21,11 @@ class _studyHomeState extends State<studyHome> {
       backgroundColor: CupertinoColors.systemBackground,
       body: CustomScrollView(
         slivers: [
-           SliverAppBar(
-            title: Text('Study Rooms',style: GoogleFonts.roboto(fontSize: 20,color: Colors.black),),
+          SliverAppBar(
+            title: Text(
+              'Study Rooms',
+              style: GoogleFonts.roboto(fontSize: 20, color: Colors.black),
+            ),
             backgroundColor: CupertinoColors.systemBackground,
             leading: const Icon(
               Icons.arrow_back_rounded,
@@ -30,9 +33,9 @@ class _studyHomeState extends State<studyHome> {
               color: CupertinoColors.black,
             ),
             expandedHeight: 100,
-             snap: false,
-             pinned: false,
-             floating: false,
+            snap: false,
+            pinned: false,
+            floating: false,
           ),
           SliverToBoxAdapter(
             child: Stack(
@@ -50,11 +53,11 @@ class _studyHomeState extends State<studyHome> {
                             bottomRight: Radius.circular(5),
                           ),
                           color: HexColor('#E2FFBA'),
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 1,
                               color: Colors.grey,
-                              offset: Offset(0,2),
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),
@@ -107,16 +110,16 @@ class _studyHomeState extends State<studyHome> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(5),
                             bottomRight: Radius.circular(5),
                           ),
                           color: HexColor('#FFDADA'),
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 1,
                               color: Colors.grey,
-                              offset: Offset(0,2),
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),
@@ -150,13 +153,14 @@ class _studyHomeState extends State<studyHome> {
                                           color: HexColor('#FF0000')),
                                     )),
                                 TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      /*get availability here  ---> temp text*/ 'RESERVE',
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 14,
-                                          color: HexColor('#FF0000')),
-                                    ))
+                                  onPressed: () {},
+                                  child: Text(
+                                    /*get availability here  ---> temp text*/ 'RESERVE',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: HexColor('#FF0000')),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -175,11 +179,11 @@ class _studyHomeState extends State<studyHome> {
                             bottomRight: Radius.circular(5),
                           ),
                           color: HexColor('#E2D0F9'),
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 1,
                               color: Colors.grey,
-                              offset: Offset(0,2),
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),

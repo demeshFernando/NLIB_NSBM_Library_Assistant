@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_room/pages/study_Home.dart';
+import 'package:study_room/pages/intro.dart';
+import 'package:study_room/pages/user_details.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
-      home: studyHome(),
+      home: IntroScreen(),
     );
   }
 }
