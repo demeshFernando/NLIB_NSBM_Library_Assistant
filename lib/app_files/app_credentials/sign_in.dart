@@ -23,16 +23,16 @@ class _SignInrState extends State<SignIn> {
         children: [
           // Logo
           Padding(
-            padding: EdgeInsets.only(top: Dimentions.height5),
+            padding: const EdgeInsets.only(top: 100.0, left: 16.0, right: 16.0),
             child: Center(
-              child: Container(
-                width: Dimentions.width220,
-                height: Dimentions.height220,
-                color: AppColors.BASE_COLOR,
-                // child: Image.asset(
-                //   'assets/register.png',
-
-                // ),
+              child: SizedBox(
+                width: Dimentions.width200,
+                height: Dimentions.height200,
+                child: const Image(
+                  image: AssetImage('asset/signin_images/NLIB.png'),
+                  height: 500,
+                  width: 500,
+                ),
               ),
             ),
           ),
@@ -40,7 +40,7 @@ class _SignInrState extends State<SignIn> {
           // Sign In Text
           Padding(
             padding: EdgeInsets.only(
-                top: Dimentions.height60, left: Dimentions.height20),
+                top: Dimentions.height8, left: Dimentions.height50),
             child: Align(
               alignment: Alignment.topLeft,
               child: TextHeader(
@@ -50,7 +50,7 @@ class _SignInrState extends State<SignIn> {
             ),
           ),
 
-          SizedBox(height: Dimentions.height30),
+          SizedBox(height: Dimentions.height20),
 
           // Student Email Text Field
           Container(
@@ -59,16 +59,16 @@ class _SignInrState extends State<SignIn> {
             ),
             child: TextField(
               decoration: InputDecoration(
-                fillColor: Colors.green.shade50,
+                fillColor: AppColors.BASE_COLOR,
                 filled: true,
-                hintText: 'Student text',
+                hintText: 'Student Email',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: AppColors.BASE_COLOR,
                   ),
-                  borderRadius: BorderRadius.vertical(),
+                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                 ),
-                prefixIcon: Icon(Icons.email),
+                prefixIcon: const Icon(Icons.email),
               ),
             ),
           ),
@@ -90,10 +90,10 @@ class _SignInrState extends State<SignIn> {
                   borderSide: BorderSide(
                     color: AppColors.BASE_COLOR,
                   ),
-                  borderRadius: BorderRadius.vertical(),
+                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                 ),
-                prefixIcon: Icon(Icons.private_connectivity_sharp),
-                suffixIcon: Icon(Icons.visibility),
+                prefixIcon: const Icon(Icons.private_connectivity_sharp),
+                suffixIcon: const Icon(Icons.visibility),
               ),
             ),
           ),
@@ -102,7 +102,7 @@ class _SignInrState extends State<SignIn> {
 
           // Remember Me and Forgot Password
           Container(
-            padding: EdgeInsets.symmetric(horizontal: Dimentions.width10),
+            padding: EdgeInsets.symmetric(horizontal: Dimentions.width15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

@@ -74,6 +74,10 @@ flutter:
     - asset/home_images/1.png
     - asset/home_images/2.png
     - asset/home_images/study_room/1.jpg
+    - asset/signin_images/NLIB.png
+    
+    
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
