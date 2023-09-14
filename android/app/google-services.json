@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232201081428",
+    "project_id": "nlib-c4ddf",
+    "storage_bucket": "nlib-c4ddf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232201081428:android:aaa3c8dc91f5e781a1d3c1",
+        "android_client_info": {
+          "package_name": "com.nsbm.nlib_library_assistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232201081428-cta8vi6bvrvv32kbai8q5clvi5vuq3of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCna1COy9IdR9e314p7ZGs1IuQGV67Id7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232201081428-cta8vi6bvrvv32kbai8q5clvi5vuq3of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
