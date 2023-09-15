@@ -309,6 +309,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+<<<<<<< Updated upstream
   wakelock:
     dependency: "direct main"
     description:
@@ -349,6 +350,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+=======
+>>>>>>> Stashed changes
   web:
     dependency: transitive
     description:
