@@ -38,7 +38,8 @@ dependencies:
   google_fonts: ^5.1.0
   wakelock: ^0.6.2
   hexcolor: ^3.0.1
-  intro_slider: ^2.4.0
+
+
 
 
 dev_dependencies:

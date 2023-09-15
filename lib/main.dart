@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:study_room/pages/intro.dart';
+
+import 'package:study_room/pages/request_handle_book.dart';
+import 'package:study_room/pages/request_handle_hall.dart';
 import 'package:study_room/pages/user_details.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
-      home: IntroScreen(),
+      home: requestHandleHall(),
     );
   }
 }
