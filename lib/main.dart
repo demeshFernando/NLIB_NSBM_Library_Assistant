@@ -10,6 +10,10 @@ import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books
 import 'package:nlib_library_assistant/app_files/category_i_files/dynamic_book.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/profile.dart';
+import 'package:nlib_library_assistant/app_files/models/student.dart';
+import 'package:nlib_library_assistant/app_files/screens/wrapper.dart';
+import 'package:nlib_library_assistant/app_files/services/auth.dart';
+import 'package:provider/provider.dart';
 
 import './utils/app_colors.dart';
 import 'app_files/category_i_files/study_room_results.dart';
@@ -27,14 +31,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.BASE_COLOR),
-        useMaterial3: true,
+    return StreamProvider<StudentUser?>.value(
+      value: AuthService().stuser,
+      initialData: null,
+      child: GetMaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.BASE_COLOR),
+          useMaterial3: true,
+        ),
+        home: const Wrapper(),
       ),
-      home: const SignIn(),
     );
   }
 }
