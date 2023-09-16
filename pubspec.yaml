@@ -39,6 +39,7 @@ dependencies:
   dots_indicator: ^2.1.1
   hexcolor: ^3.0.1
   google_fonts: ^5.1.0
+  awesome_dialog: ^3.1.0
   firebase_core: ^2.15.1
   firebase_auth: ^4.9.0
   cloud_firestore: ^4.9.1
@@ -75,6 +76,13 @@ flutter:
     - asset/home_images/2.png
     - asset/home_images/study_room/1.jpg
     - asset/signin_images/NLIB.png
+    - asset/signin_images/reset_guildelines/1.jpg
+    - asset/signin_images/reset_guildelines/2.jpg
+    - asset/signin_images/reset_guildelines/3.jpg
+    - asset/home_images/study_room/default.png
+    - asset/books/default.png
+    - asset/profile/default.png
+    - asset/books/book_category/default.png
     
     
 
