@@ -1,133 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 import './drawer.dart';
 
-class FavouriteBooks extends StatelessWidget {
+class FavouriteBooks extends StatefulWidget {
+  var tagFavouriteButton = <bool>[
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+  ];
+  _FavouriteBooksState createState() => _FavouriteBooksState();
+}
+
+class _FavouriteBooksState extends State<FavouriteBooks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SlidDrawer(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: Dimentions.height80,
-        backgroundColor: AppColors.CONTAINER_WHITE,
-        title: Container(
-          child: Column(children: [
-            SizedBox(height: Dimentions.height10),
-            Center(
-              child: Container(
-                height: Dimentions.height60,
-                width: Dimentions.width380,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimentions.radius30),
-                  color: AppColors.BASE_COLOR,
-                ),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                              width: Dimentions.width200,
-                              child: TextField(
-                                decoration:
-                                    InputDecoration(hintText: 'Search here'),
-                              )),
-                          SizedBox(
-                            width: Dimentions.width10,
-                          ),
-                          SizedBox(width: Dimentions.width10),
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  width: Dimentions.width50,
-                                  height: Dimentions.height50,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.BASE_COLOR),
-                                  child: Icon(Icons.search),
-                                ),
-                              ),
-                              SizedBox(width: Dimentions.width10),
-                              Builder(builder: (context) {
-                                return InkWell(
-                                  onTap: () {
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                  child: Container(
-                                    height: Dimentions.height50,
-                                    width: Dimentions.width50,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColors.CONTAINER_WHITE),
-                                  ),
-                                );
-                              }),
-                            ],
-                          ),
-                          SizedBox(
-                            width: Dimentions.width5,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ]),
+        backgroundColor: AppColors.BASE_COLOR,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.ICON_WHITE,
+          ),
         ),
+        title: TextHeader(text: 'Favourite Books'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: widget.tagFavouriteButton.length,
                 itemBuilder: ((context, index) {
-                  return Container(
-                    width: double.infinity,
-                    height: Dimentions.height100,
-                    margin: EdgeInsets.only(
-                      left: Dimentions.width15,
-                      right: Dimentions.width15,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: AppColors.CONTAINER_GRAY,
+                  return GestureDetector(
+                    onTap: () {
+                      Get.toNamed(FormIntegrator.getDynamicBook(1));
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: Dimentions.height100,
+                      margin: EdgeInsets.only(
+                        left: Dimentions.width15,
+                        right: Dimentions.width15,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: AppColors.CONTAINER_GRAY,
+                          ),
                         ),
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: Dimentions.height90,
-                          width: Dimentions.width50,
-                          color: AppColors.BASE_COLOR,
-                        ),
-                        SizedBox(width: Dimentions.width50),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BoldText(
-                              text: 'Head First Java',
-                              fontSize: Dimentions.font14,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: Dimentions.height90,
+                            width: Dimentions.width50,
+                            color: AppColors.BASE_COLOR,
+                            child: Image.asset(
+                              "asset/books/default.png",
+                              fit: BoxFit.cover,
                             ),
-                            SizedBox(height: Dimentions.height10),
-                            SmallText(
-                              text: 'kathy sierra',
-                              fontSize: Dimentions.font10,
+                          ),
+                          SizedBox(width: Dimentions.width50),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BoldText(
+                                text: 'Head First Java',
+                                fontSize: Dimentions.font14,
+                              ),
+                              SizedBox(height: Dimentions.height10),
+                              SmallText(
+                                text: 'kathy sierra',
+                                fontSize: Dimentions.font10,
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: Dimentions.width100),
+                          FloatingActionButton(
+                            backgroundColor: widget.tagFavouriteButton[index]
+                                ? AppColors.BUTTON_COLOR
+                                : AppColors.CONTAINER_GRAY,
+                            onPressed: () {
+                              setState(() {
+                                widget.tagFavouriteButton[index] =
+                                    !widget.tagFavouriteButton[index];
+                              });
+                            },
+                            child: Icon(
+                              widget.tagFavouriteButton[index]
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              color: widget.tagFavouriteButton[index]
+                                  ? AppColors.ICON_WHITE
+                                  : AppColors.CONTAINER_BLACK,
                             ),
-                          ],
-                        ),
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 })),

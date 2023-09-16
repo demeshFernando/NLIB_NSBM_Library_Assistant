@@ -15,17 +15,33 @@ class BorrowedBooks extends StatefulWidget {
 class _BorrowedBooks extends State<BorrowedBooks> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: ((context, index) {
-                return listContainer(index);
-              }))
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.BASE_COLOR,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.ICON_WHITE,
+          ),
+        ),
+        title: TextHeader(text: 'Reserved Study Rooms'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 10,
+                itemBuilder: ((context, index) {
+                  return listContainer(index);
+                }))
+          ],
+        ),
       ),
     );
   }
@@ -56,8 +72,7 @@ class _BorrowedBooks extends State<BorrowedBooks> {
                   width: Dimentions.width150,
                   child: Center(
                     child: BoldText(
-                        text: 'Head First Java checking the overlapping',
-                        fontSize: Dimentions.font20),
+                        text: 'Hall Name', fontSize: Dimentions.font20),
                   ),
                 ),
                 SizedBox(height: Dimentions.height10),
@@ -65,32 +80,28 @@ class _BorrowedBooks extends State<BorrowedBooks> {
                   width: Dimentions.width150,
                   child: Center(
                       child: SmallText(
-                    text: 'kathy sierra, checking the overlowing cabaility',
+                    text: 'Hall ID: ',
                     maxLines: 2,
                   )),
                 ),
               ],
             ),
-            Container(
-              height: Dimentions.height100,
-              width: Dimentions.width50,
-              color: AppColors.BASE_COLOR,
-              child: Image.asset(
-                "asset/books/default.png",
-                fit: BoxFit.cover,
-              ),
-            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BoldText(
-                  text: '2023/23/23',
+                  text: 'Reserved Date: ',
                   fontSize: Dimentions.font14,
                   fontColor: AppColors.GRAY_COLOR,
                 ),
                 SizedBox(height: Dimentions.height10),
                 BoldText(
-                  text: '2023/23/23',
+                  text: 'Reserved on: ',
+                  fontSize: Dimentions.font14,
+                ),
+                SizedBox(height: Dimentions.height10),
+                BoldText(
+                  text: 'Total student availability: ',
                   fontSize: Dimentions.font14,
                 ),
               ],

@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
-class DynamicBook extends StatelessWidget {
-  const DynamicBook({super.key});
+class DynamicBook extends StatefulWidget {
+  final int pageId;
+  const DynamicBook({super.key, required this.pageId});
+
+  _DynamicBookState createState() => _DynamicBookState();
+}
+
+class _DynamicBookState extends State<DynamicBook> {
+  bool isClickedFavouriteButton = false;
+  Color buttonBackColor = AppColors.CONTAINER_WHITE,
+      iconColor = AppColors.ICON_GRAY;
+
+  void stateChange() {
+    isClickedFavouriteButton = !isClickedFavouriteButton;
+    setState(() {
+      buttonBackColor = isClickedFavouriteButton
+          ? AppColors.BUTTON_COLOR
+          : AppColors.CONTAINER_WHITE;
+      iconColor =
+          isClickedFavouriteButton ? AppColors.ICON_WHITE : AppColors.ICON_GRAY;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,13 +34,21 @@ class DynamicBook extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             pinned: true,
             expandedHeight: Dimentions.height650,
-            toolbarHeight: Dimentions.height70,
+            toolbarHeight: Dimentions.height100,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.ICON_WHITE,
+                    )),
               ],
             ),
             bottom: PreferredSize(
@@ -33,9 +63,13 @@ class DynamicBook extends StatelessWidget {
                         topLeft: Radius.circular(Dimentions.radius20),
                         topRight: Radius.circular(Dimentions.radius20))),
                 child: Center(
-                  child: TextHeader(
-                    text: 'Harry Potter and the order of the phoenix',
-                    fontColor: AppColors.NORMAL_TEXT_COLOR,
+                  child: SizedBox(
+                    width: Dimentions.width300,
+                    child: TextHeader(
+                      text: 'Harry Potter and the order of the phoenix',
+                      fontColor: AppColors.NORMAL_TEXT_COLOR,
+                      maxLines: 10,
+                    ),
                   ),
                 ),
               ),
@@ -57,7 +91,14 @@ class DynamicBook extends StatelessWidget {
                     child: Column(
                       children: [
                         Center(
-                          child: SmallText(text: 'by Jk rowlings'),
+                          child: SizedBox(
+                              width: Dimentions.width300,
+                              child: Center(
+                                child: SmallText(
+                                  text: 'by Jk rowlings',
+                                  maxLines: 3,
+                                ),
+                              )),
                         ),
                         SizedBox(height: Dimentions.height50),
                         Row(
@@ -100,6 +141,14 @@ class DynamicBook extends StatelessWidget {
                             ],
                           ),
                         ),
+                        Container(
+                          width: double.maxFinite,
+                          child: SmallText(
+                            text:
+                                'this is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookdescription of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the book',
+                            maxLines: 100,
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -118,11 +167,13 @@ class DynamicBook extends StatelessWidget {
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           FloatingActionButton(
-            backgroundColor: AppColors.BUTTON_COLOR,
-            onPressed: () {},
+            backgroundColor: buttonBackColor,
+            onPressed: () {
+              stateChange();
+            },
             child: Icon(
               Icons.favorite,
-              color: AppColors.HEADER_TEXT_COLOR,
+              color: iconColor,
             ),
           )
         ]),

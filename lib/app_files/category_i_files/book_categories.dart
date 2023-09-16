@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import '../../widgets/text_formatter.dart';
 import '../../utils/app_colors.dart';
@@ -14,8 +17,18 @@ class _BookCategories extends State<BookCategories> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.BASE_COLOR,
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.ICON_WHITE,
+          ),
+        ),
         title: TextHeader(text: 'Book categories'),
       ),
       body: SingleChildScrollView(
@@ -32,9 +45,7 @@ class _BookCategories extends State<BookCategories> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        categoryCard(),
-                        SizedBox(width: Dimentions.width20),
-                        categoryCard(),
+                        categoryCard(index),
                       ],
                     ),
                   );
@@ -45,31 +56,30 @@ class _BookCategories extends State<BookCategories> {
     );
   }
 
-  Widget categoryCard() {
+  Widget categoryCard(int pageIndex) {
     return Container(
-      width: 160,
-      height: 160,
+      width: Dimentions.width300,
+      height: Dimentions.height300,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimentions.radius10),
           color: AppColors.BASE_COLOR),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: Dimentions.width150,
-            height: Dimentions.height100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimentions.radius10),
-            ),
-            child: InkWell(
-              onTap: () {},
-              child: Center(
-                child: Text(
-                  'The picture goes here',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
+          SizedBox(height: Dimentions.height20),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getBookCategoryResult(pageIndex));
+            },
+            child: Container(
+              width: Dimentions.width250,
+              height: Dimentions.height150,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimentions.radius10),
+                  color: AppColors.CONTAINER_WHITE),
+              child: Image.asset(
+                "asset/books/book_category/default.png",
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -79,7 +89,7 @@ class _BookCategories extends State<BookCategories> {
             child: Center(
               child: BoldText(text: "Engineering"),
             ),
-          )
+          ),
         ],
       ),
     );

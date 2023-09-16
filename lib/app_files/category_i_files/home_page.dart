@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import '../../utils/dimentions.dart';
 import '../../widgets/rounded_button.dart';
 import './drawer.dart';
@@ -17,10 +20,6 @@ class _MainHomePage extends State<MainHomePage> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
   double _schaleFactor = 0.8, _height = Dimentions.height220;
-  int currentTab = 0;
-  final List<Widget> screens = [];
-  final PageStorageBucket bucket = PageStorageBucket();
-  // Widget currentScreen = Dashborad();
 
   @override
   void initState() {
@@ -44,84 +43,6 @@ class _MainHomePage extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SlidDrawer(),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: Dimentions.height80,
-        backgroundColor: Colors.white,
-        title: Container(
-          child: Column(children: [
-            SizedBox(height: Dimentions.height10),
-            Center(
-              child: Container(
-                height: Dimentions.height60,
-                width: Dimentions.width380,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimentions.radius30),
-                  color: AppColors.BASE_COLOR,
-                ),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                              width: Dimentions.width200,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Search Here',
-                                ),
-                              )),
-                          SizedBox(
-                            width: Dimentions.width10,
-                          ),
-                          SizedBox(width: Dimentions.width10),
-                          Row(
-                            children: [
-                              Container(
-                                width: Dimentions.width50,
-                                height: Dimentions.height50,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.BASE_COLOR,
-                                ),
-                                child: IconButton(
-                                  icon: Icon(Icons.search),
-                                  iconSize: Dimentions.icon24,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(width: Dimentions.width10),
-                              Builder(builder: (context) {
-                                return InkWell(
-                                  onTap: () {
-                                    Scaffold.of(context).openDrawer();
-                                  },
-                                  child: Container(
-                                    width: Dimentions.width50,
-                                    height: Dimentions.height50,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                  ),
-                                );
-                              }),
-                            ],
-                          ),
-                          SizedBox(
-                            width: Dimentions.width5,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ]),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -177,6 +98,7 @@ class _MainHomePage extends State<MainHomePage> {
             SizedBox(height: Dimentions.height20),
             //seat count
             mainCard(
+              cardIndex: 0,
               mainHeader: 'Seat Count',
               description:
                   'Check wetherh your seat ready and available before visiting inside the library',
@@ -189,6 +111,7 @@ class _MainHomePage extends State<MainHomePage> {
 
             //book search page
             mainCard(
+              cardIndex: 1,
               mainHeader: 'Search Book',
               description:
                   'You can search a book title and check whether the book is available.',
@@ -196,15 +119,18 @@ class _MainHomePage extends State<MainHomePage> {
               imageUrl: "./asset/home_images/1.png",
               bottom: Dimentions.height100,
               pictureContainerHeight: Dimentions.height200,
+              isButtonShow: false,
             ),
             SizedBox(height: Dimentions.height20),
 
             mainCard(
+              cardIndex: 2,
               mainHeader: 'Reserve a study room',
               description:
                   'You can reserve a study room through the app, if rooms are available',
               buttonText: 'Check',
               imageUrl: "./asset/home_images/2.png",
+              isButtonShow: false,
             ),
             SizedBox(height: Dimentions.height20),
           ],
@@ -218,9 +144,11 @@ class _MainHomePage extends State<MainHomePage> {
     required String description,
     required String buttonText,
     required String imageUrl,
+    required int cardIndex,
     double left = 25,
     double bottom = 200,
     double pictureContainerHeight = 300,
+    bool isButtonShow = true,
   }) {
     return Stack(
       children: [
@@ -279,12 +207,20 @@ class _MainHomePage extends State<MainHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          InkWell(
-                            onTap: () {},
-                            child: RoundButton(
-                              buttonText: buttonText,
-                            ),
-                          ),
+                          isButtonShow
+                              ? GestureDetector(
+                                  onTap: () {
+                                    if (cardIndex == 0) {
+                                    } else if (cardIndex == 2) {
+                                      Get.toNamed(FormIntegrator
+                                          .getStudyRoomSelection());
+                                    }
+                                  },
+                                  child: RoundButton(
+                                    buttonText: buttonText,
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     ],
@@ -350,34 +286,39 @@ class _MainHomePage extends State<MainHomePage> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            //color: Colors.redAccent,
-            width: Dimentions.width350,
-            height: _height,
-            padding: EdgeInsets.all(Dimentions.radius10),
-            margin: EdgeInsets.only(
-                left: Dimentions.width10, right: Dimentions.width10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimentions.radius30),
-              border: Border.all(color: AppColors.CONTAINER_BLACK),
-              color: index.isEven
-                  ? AppColors.CONTAINER_WHITE
-                  : AppColors.CONTAINER_COLOR,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BoldText(text: 'name of the author'),
-                TextHeader(
-                    text: 'name of the author and the title is be here.',
-                    fontColor: AppColors.NORMAL_TEXT_COLOR),
-                SmallText(
-                  text:
-                      'description will be the description will be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the description',
-                  maxLines: 5,
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getDynamicBook(index));
+            },
+            child: Container(
+              //color: Colors.redAccent,
+              width: Dimentions.width350,
+              height: _height,
+              padding: EdgeInsets.all(Dimentions.radius10),
+              margin: EdgeInsets.only(
+                  left: Dimentions.width10, right: Dimentions.width10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimentions.radius30),
+                border: Border.all(color: AppColors.CONTAINER_BLACK),
+                color: index.isEven
+                    ? AppColors.CONTAINER_WHITE
+                    : AppColors.CONTAINER_COLOR,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BoldText(text: 'name of the author'),
+                  TextHeader(
+                      text: 'name of the author and the title is be here.',
+                      fontColor: AppColors.NORMAL_TEXT_COLOR),
+                  SmallText(
+                    text:
+                        'description will be the description will be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the description',
+                    maxLines: 5,
+                  )
+                ],
+              ),
             ),
           ),
         ],

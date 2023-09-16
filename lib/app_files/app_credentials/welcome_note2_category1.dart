@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 
 import '../../utils/dimentions.dart';
 import '../../widgets/dots_indicator.dart';
@@ -50,7 +53,12 @@ class Category1WelcomeNote2 extends StatelessWidget {
             DotsIndicatorContainers(changingNumber: 1),
 
             SizedBox(height: Dimentions.height30),
-            RoundButton(buttonText: 'Next', buttonWidth: Dimentions.width200),
+            GestureDetector(
+                onTap: () {
+                  Get.toNamed(FormIntegrator.getWelcomeNote3Category1());
+                },
+                child: RoundButton(
+                    buttonText: 'Next', buttonWidth: Dimentions.width200)),
           ],
         ),
       ),

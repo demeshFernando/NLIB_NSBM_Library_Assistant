@@ -1,20 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
 import '../../utils/dimentions.dart';
 
-class studyRoom01 extends StatefulWidget {
-  const studyRoom01({super.key});
+class StudyRoomResults extends StatefulWidget {
+  final int pageId;
+  const StudyRoomResults({super.key, required this.pageId});
 
   @override
-  State<studyRoom01> createState() => _studyRoom01State();
+  State<StudyRoomResults> createState() => _studyRoomResultsState();
 }
 
-class _studyRoom01State extends State<studyRoom01> {
+class _studyRoomResultsState extends State<StudyRoomResults> {
   TextEditingController _hourcontroller = TextEditingController();
   TextEditingController _minutecontroller = TextEditingController();
   List<bool> _selections = List.generate(2, (index) => false);
@@ -25,10 +28,15 @@ class _studyRoom01State extends State<studyRoom01> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            leading: Icon(
-              Icons.arrow_back_rounded,
-              size: Dimentions.icon35,
-              color: AppColors.ICON_WHITE,
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                size: Dimentions.icon35,
+                color: AppColors.ICON_WHITE,
+              ),
             ),
             expandedHeight: Dimentions.height250,
             flexibleSpace: FlexibleSpaceBar(
@@ -98,20 +106,6 @@ class _studyRoom01State extends State<studyRoom01> {
                               SizedBox(
                                 height: Dimentions.height60,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      // RESERVE text button function //
-                                    },
-                                    child: SmallText(
-                                      text: 'RESERVE',
-                                      fontColor: AppColors.WARNING_TEXT_COLOR,
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
@@ -245,15 +239,8 @@ class _studyRoom01State extends State<studyRoom01> {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              // ** Reset textbutton function **//
-                                            },
-                                            child: SmallText(
-                                              text: 'Reset',
-                                              fontColor: AppColors.BUTTON_COLOR,
-                                            )),
-                                        TextButton(
-                                            onPressed: () {
-                                              // ** Reset textbutton function **//
+                                              Get.toNamed(FormIntegrator
+                                                  .getStudyRoomUserSelection());
                                             },
                                             child: SmallText(
                                               text: 'Ok',
