@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
+import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import '../../utils/dimentions.dart';
 
 import '../../widgets/rounded_button.dart';
@@ -14,7 +18,17 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInrState extends State<SignIn> {
-  bool rememberMe = false; // Store the switch state
+  bool rememberMe = true, isPasswordVisibilityStatus = false;
+  FocusNode usernameFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    usernameFocusNode.requestFocus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +37,13 @@ class _SignInrState extends State<SignIn> {
         children: [
           // Logo
           Padding(
-            padding: const EdgeInsets.only(top: 100.0, left: 16.0, right: 16.0),
+            padding: EdgeInsets.only(top: Dimentions.height5),
             child: Center(
               child: SizedBox(
                 width: Dimentions.width200,
                 height: Dimentions.height200,
                 child: const Image(
                   image: AssetImage('asset/signin_images/NLIB.png'),
-                  height: 500,
-                  width: 500,
                 ),
               ),
             ),
@@ -40,7 +52,7 @@ class _SignInrState extends State<SignIn> {
           // Sign In Text
           Padding(
             padding: EdgeInsets.only(
-                top: Dimentions.height8, left: Dimentions.height50),
+                top: Dimentions.height60, left: Dimentions.height20),
             child: Align(
               alignment: Alignment.topLeft,
               child: TextHeader(
@@ -58,10 +70,12 @@ class _SignInrState extends State<SignIn> {
               horizontal: Dimentions.width35,
             ),
             child: TextField(
+              controller: usernameController,
+              focusNode: usernameFocusNode,
               decoration: InputDecoration(
                 fillColor: AppColors.BASE_COLOR,
                 filled: true,
-                hintText: 'Student Email',
+                hintText: 'index / Email',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: AppColors.BASE_COLOR,
@@ -81,7 +95,9 @@ class _SignInrState extends State<SignIn> {
               horizontal: Dimentions.width35,
             ),
             child: TextField(
-              obscureText: true,
+              controller: passwordController,
+              focusNode: passwordFocusNode,
+              obscureText: !isPasswordVisibilityStatus ? true : false,
               decoration: InputDecoration(
                 fillColor: AppColors.BASE_COLOR,
                 filled: true,
@@ -93,7 +109,16 @@ class _SignInrState extends State<SignIn> {
                   borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                 ),
                 prefixIcon: const Icon(Icons.private_connectivity_sharp),
-                suffixIcon: const Icon(Icons.visibility),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isPasswordVisibilityStatus =
+                            !isPasswordVisibilityStatus;
+                      });
+                    },
+                    icon: Icon(!isPasswordVisibilityStatus
+                        ? Icons.visibility
+                        : Icons.visibility_off)),
               ),
             ),
           ),
@@ -124,10 +149,10 @@ class _SignInrState extends State<SignIn> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Add logic for the "Forgot Password" action
+                    Get.toNamed(FormIntegrator.getPasswordResetGuidelines());
                   },
                   child: BoldText(
-                    text: 'Forgot Password',
+                    text: 'Credential Guidlines',
                     fontColor: AppColors.BASE_COLOR,
                   ),
                 ),
@@ -138,12 +163,99 @@ class _SignInrState extends State<SignIn> {
           SizedBox(height: Dimentions.height20),
 
           // Sign In Button
-          RoundButton(
-            buttonText: 'Sign In',
-            buttonWidth: Dimentions.width200,
+          GestureDetector(
+            onTap: () {
+              print(
+                  "username is: ${usernameController.text} and password is: ${passwordController.text}");
+              //special entry
+              if (usernameController.text == "" &&
+                  passwordController.text == "") {
+                Get.toNamed(FormIntegrator.getWelcomeNote1Category1());
+              }
+
+              //if the username field is empty
+              else if (usernameController.text == "") {
+                warningMessage(
+                    context, "Error", "Username field cannot kept empty.", () {
+                  usernameFocusNode.requestFocus();
+                });
+              }
+              //if the password field is empty
+              else if (passwordController.text == "") {
+                warningMessage(
+                    context, "Error", "Password field cannot kept empty", () {
+                  passwordFocusNode.requestFocus();
+                });
+              }
+              //if the rememberme switch is not checked
+              else if (!rememberMe) {
+                infoMessage(context, "Remember you",
+                    "You didn't check remember me option. this may always make you sign in again and again. System recommendation is to on that switch. Whould you like to move on without any furthur message. And please be aware that if this is not the your phone then please don't switch on it.",
+                    () {
+                  Get.toNamed(FormIntegrator.getWelcomeNote1Category1());
+                });
+              }
+              //if both are in a proper way
+              else {
+                errorMessage(context, "Error",
+                    "There is not proper credential recognition to move on. Please try again.",
+                    () {
+                  usernameFocusNode.requestFocus();
+                });
+              }
+            },
+            child: RoundButton(
+              buttonText: 'Sign In',
+              buttonWidth: Dimentions.width200,
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void warningMessage(
+    BuildContext context,
+    String title,
+    String description,
+    VoidCallback onPressed,
+  ) {
+    DialogBox warningMessage = DialogBox(
+      context: context,
+      title: title,
+      description: description,
+      onPressed: onPressed,
+    );
+    warningMessage.warningDialogBox();
+  }
+
+  void errorMessage(
+    BuildContext context,
+    String title,
+    String description,
+    VoidCallback onPressed,
+  ) {
+    DialogBox warningMessage = DialogBox(
+      context: context,
+      title: title,
+      description: description,
+      onPressed: onPressed,
+    );
+    warningMessage.errorMessage();
+  }
+
+  void infoMessage(
+    BuildContext context,
+    String title,
+    String description,
+    VoidCallback onPressed,
+  ) {
+    DialogBox warningMessage = DialogBox(
+      context: context,
+      title: title,
+      description: description,
+      onPressed: onPressed,
+    );
+    warningMessage.cautionMessage();
   }
 }

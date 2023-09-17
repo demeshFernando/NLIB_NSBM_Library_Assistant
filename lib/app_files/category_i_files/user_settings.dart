@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 
 import '../../utils/dimentions.dart';
@@ -30,7 +32,9 @@ class _UserSettings extends State<UserSettings> {
             Icons.arrow_back,
             color: AppColors.ICON_WHITE,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
         ),
       ),
       body: SingleChildScrollView(
