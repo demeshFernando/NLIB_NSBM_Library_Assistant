@@ -44,6 +44,7 @@ class Dimentions {
   static double width35 = screenWidth / 11.14;
   static double width40 = screenWidth / 9.75;
   static double width50 = screenWidth / 7.8;
+  static double width60 = screenWidth / 6.5;
   static double width80 = screenWidth / 4.875;
   static double width100 = screenWidth / 3.9;
   static double width150 = screenWidth / 2.6;
@@ -59,6 +60,7 @@ class Dimentions {
   static double radius10 = screenHeight / 84.4;
   static double radius12 = screenHeight / 70.33;
   static double radius20 = screenHeight / 42.2;
+  static double radius25 = screenHeight / 33.76;
   static double radius30 = screenHeight / 28.13;
   static double radius70 = screenHeight / 12.06;
   static double radius80 = screenHeight / 10.55;

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
 class SearchResult extends StatefulWidget {
-  const SearchResult({super.key});
+  final String searchText;
+  const SearchResult({super.key, required this.searchText});
 
   @override
   State<SearchResult> createState() => _SearchResultState();
@@ -15,11 +19,12 @@ class _SearchResultState extends State<SearchResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.BASE_COLOR,
         title: Padding(
           padding: EdgeInsets.only(left: Dimentions.width20),
           child: TextHeader(
-            text: "Harry Potter",
+            text: "${widget.searchText}",
           ),
         ),
         leading: Padding(
@@ -30,45 +35,48 @@ class _SearchResultState extends State<SearchResult> {
               color: AppColors.ICON_WHITE,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          SizedBox(height: Dimentions.height40),
-          ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: Dimentions.height10),
-                      ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {},
-                              child: notificationPane(),
-                            );
-                          }),
-                    ],
-                  ),
-                );
-              }),
+          Container(
+            margin: EdgeInsets.only(
+              left: Dimentions.width10,
+              top: Dimentions.height10,
+            ),
+            width: double.maxFinite,
+            child: TextHeader(
+              text: 'Search Result',
+              fontColor: AppColors.NORMAL_TEXT_COLOR,
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                SizedBox(height: Dimentions.height40),
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return notificationPane(index);
+                    }),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget notificationPane() {
+  Widget notificationPane(int tileId) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(FormIntegrator.getDynamicBook(tileId));
+      },
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(bottom: Dimentions.height5),
@@ -86,7 +94,10 @@ class _SearchResultState extends State<SearchResult> {
                   Container(
                     height: Dimentions.height90,
                     width: Dimentions.width40,
-                    color: AppColors.CONTAINER_COLOR,
+                    child: Image.asset(
+                      "asset/books/default.png",
+                      fit: BoxFit.cover,
+                    ),
                   )
                 ],
               ),

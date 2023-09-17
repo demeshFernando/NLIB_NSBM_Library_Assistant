@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
@@ -15,31 +18,49 @@ class StudyRoomSelection extends StatefulWidget {
 class _StudyRoomSelectionState extends State<StudyRoomSelection> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.BASE_COLOR,
-        title: TextHeader(text: 'Study Rooms'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          // alignment: Alignment.center,
-          children: [
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: ((context, index) {
-                return studyRoom(roomName: 'Study Room1');
-              }),
-            ),
-          ],
+    return Column(
+      // alignment: Alignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.all(Dimentions.height20),
+          width: double.maxFinite,
+          child: Row(
+            children: [
+              Expanded(child: Container()),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.app_registration,
+                  color: AppColors.BUTTON_COLOR,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  itemBuilder: ((context, index) {
+                    return studyRoom(roomName: 'Study Room1', tileIndex: index);
+                  }),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   Widget studyRoom({
     required String roomName,
+    String seatingCapacity = '1',
+    required int tileIndex,
   }) {
     return Container(
       margin: EdgeInsets.all(Dimentions.height40),
@@ -61,7 +82,13 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
       // height: 500,
       child: Column(
         children: [
-          WelcomeNoteImage(imageUrl: "", isPaddingRequired: false),
+          GestureDetector(
+              onTap: () {
+                Get.toNamed(FormIntegrator.getStudyRoomResults(tileIndex));
+              },
+              child: WelcomeNoteImage(
+                  imageUrl: "asset/home_images/study_room/default.png",
+                  isPaddingRequired: false)),
           SizedBox(
             height: Dimentions.height20,
           ),
@@ -70,6 +97,8 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
             fontSize: Dimentions.font16,
             fontColor: AppColors.NORMAL_TEXT_COLOR,
           ),
+          SizedBox(height: Dimentions.height20),
+          SmallText(text: 'Seating capacity: $seatingCapacity'),
           SizedBox(
             height: Dimentions.height25,
           ),
@@ -79,15 +108,9 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
                 width: Dimentions.width5,
               ),
               TextButton(
-                onPressed: () {},
-                child: BoldText(
-                  text: 'Book',
-                  fontSize: Dimentions.font14,
-                  fontColor: AppColors.WARNING_TEXT_COLOR,
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(FormIntegrator.getStudyRoomResults(tileIndex));
+                },
                 child: BoldText(
                   text: 'Reserve',
                   fontSize: Dimentions.font14,
