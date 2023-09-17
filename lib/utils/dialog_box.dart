@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+//import 'dart:js';
+
+>>>>>>> 5790b33e97a81d37be2585c98bd7ce29332068e8
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 

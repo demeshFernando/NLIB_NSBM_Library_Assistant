@@ -1,5 +1,11 @@
 // ignore_for_file: avoid_unnecessary_containers
 
+<<<<<<< HEAD
+=======
+//import 'dart:html';
+//import 'dart:math';
+
+>>>>>>> 5790b33e97a81d37be2585c98bd7ce29332068e8
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
