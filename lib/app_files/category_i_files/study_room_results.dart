@@ -1,10 +1,14 @@
-import 'dart:ui';
+// ignore: duplicate_ignore
+
+// ignore_for_file: camel_case_types, duplicate_ignore
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
+import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
 import '../../utils/dimentions.dart';
@@ -17,11 +21,24 @@ class StudyRoomResults extends StatefulWidget {
   State<StudyRoomResults> createState() => _studyRoomResultsState();
 }
 
+// ignore: camel_case_types
 class _studyRoomResultsState extends State<StudyRoomResults> {
-  TextEditingController _hourcontroller = TextEditingController();
-  TextEditingController _minutecontroller = TextEditingController();
-  List<bool> _selections = List.generate(2, (index) => false);
-  bool isAM = true; //**  AM/PM button , if AM selected this is true  **//
+  final TextEditingController _hourcontroller = TextEditingController();
+  final TextEditingController _minutecontroller = TextEditingController();
+  final FocusNode _hourFocusing = FocusNode();
+  final FocusNode _minuteFocusing = FocusNode();
+  final List<bool> _selections = [true, false];
+  bool isAM = true;
+
+  @override
+  void initState() {
+    super.initState();
+    int getHour = DateTime.now().hour;
+    _selections[0] = getHour < 12 ? true : false;
+    _selections[1] = getHour < 12 ? false : true;
+    _hourFocusing.requestFocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +79,7 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(Dimentions.height8),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: Column(
                       children: [
@@ -148,6 +165,7 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     timeField(
+                                      focusNode: _hourFocusing,
                                       controller: _hourcontroller,
                                       style: TextStyle(
                                           height: 1,
@@ -172,6 +190,7 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
                                       width: Dimentions.width3,
                                     ),
                                     timeField(
+                                      focusNode: _minuteFocusing,
                                       controller: _minutecontroller,
                                       style: TextStyle(
                                           height: 1,
@@ -220,7 +239,7 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
                                               Radius.circular(
                                                   Dimentions.radius12),
                                             ),
-                                            children: [
+                                            children: const [
                                               SmallText(text: 'AM'),
                                               SmallText(text: 'PM'),
                                             ],
@@ -239,8 +258,55 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
                                       children: [
                                         TextButton(
                                             onPressed: () {
-                                              Get.toNamed(FormIntegrator
-                                                  .getStudyRoomUserSelection());
+                                              //if hour or the minute or the both are empty
+                                              if ((_hourcontroller.text ==
+                                                      "") ||
+                                                  (_minutecontroller.text ==
+                                                      "") ||
+                                                  (_hourcontroller.text == "" &&
+                                                      _minutecontroller.text ==
+                                                          "")) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Time Constraints",
+                                                    "Enter the correct hour and minute to be proceed.",
+                                                    () {
+                                                  _hourFocusing.requestFocus();
+                                                });
+                                              }
+
+                                              //if hour is not in valuable state
+                                              else if (int.parse(
+                                                      _hourcontroller.text) >
+                                                  12) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Hour Constraint",
+                                                    "Enter the hour in the correct format. Only 1 - 12 hour can be acceptable. differentiate those time limits from AM or PM limits.",
+                                                    () {
+                                                  _hourFocusing.requestFocus();
+                                                });
+                                              }
+
+                                              //if minute is not in valuable state
+                                              else if (int.parse(
+                                                      _minutecontroller.text) >
+                                                  59) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Minute Constraint",
+                                                    "The minute limit only acceptable within 0 - 59. please adhere to the constraint.",
+                                                    () {
+                                                  _minuteFocusing
+                                                      .requestFocus();
+                                                });
+                                              }
+
+                                              //if both are ok
+                                              else {
+                                                Get.toNamed(FormIntegrator
+                                                    .getStudyRoomUserSelection());
+                                              }
                                             },
                                             child: SmallText(
                                               text: 'Ok',
@@ -266,6 +332,16 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
     );
   }
 
+  void warningTextMessage(BuildContext context, String title,
+      String description, VoidCallback onPressed) {
+    DialogBox conveyTheWarning = DialogBox(
+        context: context,
+        title: title,
+        description: description,
+        onPressed: onPressed);
+    conveyTheWarning.warningDialogBox();
+  }
+
   @override
   void dispose() {
     _hourcontroller.dispose();
@@ -274,10 +350,11 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
   }
 }
 
+// ignore: camel_case_types
 class fontAppbar extends StatelessWidget {
   final String text;
   final Color color;
-  fontAppbar({super.key, required this.text, required this.color});
+  const fontAppbar({super.key, required this.text, required this.color});
   @override
   Widget build(BuildContext context) {
     return TextHeader(
@@ -287,6 +364,7 @@ class fontAppbar extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class cardHead extends StatelessWidget {
   final String text;
   final double fontSize;
@@ -320,6 +398,7 @@ class timeField extends StatelessWidget {
   final String unit;
   final Color hexborderfocus;
   final Color hexfill;
+  final FocusNode focusNode;
 
   const timeField(
       {super.key,
@@ -327,11 +406,12 @@ class timeField extends StatelessWidget {
       required this.style,
       required this.unit,
       required this.hexfill,
-      required this.hexborderfocus});
+      required this.hexborderfocus,
+      required this.focusNode});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // color: Colors.greenAccent,
       width: Dimentions.width100,
       height: Dimentions.height150,
@@ -340,6 +420,12 @@ class timeField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
+            focusNode: focusNode,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              FilteringTextInputFormatter.digitsOnly,
+            ],
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               counterText: '',

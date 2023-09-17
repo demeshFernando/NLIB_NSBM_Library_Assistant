@@ -9,6 +9,8 @@ class DynamicBook extends StatefulWidget {
   final int pageId;
   const DynamicBook({super.key, required this.pageId});
 
+  @override
+  // ignore: library_private_types_in_public_api
   _DynamicBookState createState() => _DynamicBookState();
 }
 
@@ -75,7 +77,7 @@ class _DynamicBookState extends State<DynamicBook> {
               ),
             ),
             backgroundColor: AppColors.BASE_COLOR,
-            flexibleSpace: FlexibleSpaceBar(
+            flexibleSpace: const FlexibleSpaceBar(
                 // background: Image.asset('name', width: double.maxFinite, fit: BoxFit.cover,),
                 ),
           ),
@@ -93,7 +95,7 @@ class _DynamicBookState extends State<DynamicBook> {
                         Center(
                           child: SizedBox(
                               width: Dimentions.width300,
-                              child: Center(
+                              child: const Center(
                                 child: SmallText(
                                   text: 'by Jk rowlings',
                                   maxLines: 3,
@@ -141,7 +143,7 @@ class _DynamicBookState extends State<DynamicBook> {
                             ],
                           ),
                         ),
-                        Container(
+                        const SizedBox(
                           width: double.maxFinite,
                           child: SmallText(
                             text:
@@ -191,7 +193,7 @@ class _DynamicBookState extends State<DynamicBook> {
               shape: BoxShape.circle, color: AppColors.CONTAINER_BLACK),
         ),
         SizedBox(width: Dimentions.width10),
-        SmallText(text: '$text'),
+        SmallText(text: text),
       ],
     );
   }

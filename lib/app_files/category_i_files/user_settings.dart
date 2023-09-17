@@ -52,7 +52,7 @@ class _UserSettings extends State<UserSettings> {
                 left: Dimentions.width20,
                 right: Dimentions.width50,
               ),
-              child: SmallText(
+              child: const SmallText(
                 text:
                     "Any lorem word about 20 word count Any lorem word about 20",
                 maxLines: 2,
@@ -69,7 +69,7 @@ class _UserSettings extends State<UserSettings> {
                 left: Dimentions.width20,
                 right: Dimentions.width50,
               ),
-              child: SmallText(
+              child: const SmallText(
                 text:
                     "Any lorem word about 20 word count Any lorem word about 20",
                 maxLines: 2,

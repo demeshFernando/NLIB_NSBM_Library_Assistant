@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
+import "package:nlib_library_assistant/form_integration/form_integrater.dart";
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 
 import '../../widgets/dots_indicator.dart';
@@ -21,12 +20,12 @@ class Category1WelcomeNote3 extends StatelessWidget {
             WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/3.png"),
             SizedBox(height: Dimentions.height25),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Allocate a study',
               ),
             ),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'room online',
               ),
@@ -34,7 +33,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
             SizedBox(height: Dimentions.height25),
             Padding(
               padding: EdgeInsets.all(Dimentions.height5),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SmallText(
@@ -50,7 +49,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
             ),
             SizedBox(height: Dimentions.height30),
             // Add spacing between text and button
-            DotsIndicatorContainers(changingNumber: 2),
+            const DotsIndicatorContainers(changingNumber: 2),
 
             SizedBox(height: Dimentions.height30),
             GestureDetector(

@@ -7,6 +7,8 @@ import 'package:nlib_library_assistant/widgets/images.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
 class PasswordResetGuideliness extends StatelessWidget {
+  const PasswordResetGuideliness({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class PasswordResetGuideliness extends StatelessWidget {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Reset Credentials'),
+        title: const TextHeader(text: 'Reset Credentials'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -59,11 +61,11 @@ class PasswordResetGuideliness extends StatelessWidget {
             bodyContainer(
               'since the username and the password is created by the university itself for you since you registered to the university, the application itself does not have permission to reset the username or password. which reserved for you. If you believe that your password is leaked you can lock the application by visiting to the library or sending a mail to the library staff. Even you can get library details using the application though the mail does not fix any thing instantly it will be a proof to say that from now onward the actions you are doing using the application is not authorized by you.',
             ),
-            Container(
+            const SizedBox(
               width: double.maxFinite,
               child: Center(child: BoldText(text: 'Thank you!')),
             ),
-            Container(
+            const SizedBox(
               width: double.maxFinite,
               child: Center(child: SmallText(text: 'Use the product wisely.')),
             )
@@ -84,6 +86,7 @@ class PasswordResetGuideliness extends StatelessWidget {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget UnderlineContainer() {
     return Row(
       children: [

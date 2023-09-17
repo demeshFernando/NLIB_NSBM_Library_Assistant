@@ -5,8 +5,11 @@ import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class NotificationMessage extends StatelessWidget {
   String text = "Heading";
+
+  NotificationMessage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,7 @@ class NotificationMessage extends StatelessWidget {
               onTap: () {
                 Get.back();
               },
-              child: Container(
+              child: SizedBox(
                 width: Dimentions.width50,
                 child: BoldText(
                   text: '4',
@@ -30,9 +33,9 @@ class NotificationMessage extends StatelessWidget {
               ),
             ),
             SizedBox(width: Dimentions.width20),
-            Container(
+            SizedBox(
               width: Dimentions.width250,
-              child: TextHeader(text: 'W. D. Fernando'),
+              child: const TextHeader(text: 'W. D. Fernando'),
             ),
           ],
         ),
@@ -40,7 +43,7 @@ class NotificationMessage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: Dimentions.height40),
-          Container(
+          SizedBox(
             width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -69,7 +72,7 @@ class NotificationMessage extends StatelessWidget {
             color: AppColors.CONTAINER_GRAY,
           ),
           SizedBox(height: Dimentions.height10),
-          Container(
+          SizedBox(
             width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +83,7 @@ class NotificationMessage extends StatelessWidget {
                   fontSize: Dimentions.font16,
                 ),
                 SizedBox(width: Dimentions.width10),
-                Container(
+                SizedBox(
                   width: Dimentions.width300,
                   child: SmallText(
                     text: 'Demesh Fernando (Librarian)',
@@ -104,7 +107,7 @@ class NotificationMessage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(Dimentions.height20),
-                    child: SmallText(
+                    child: const SmallText(
                       text: 'Message will be displayed here.',
                       maxLines: 100,
                     ),

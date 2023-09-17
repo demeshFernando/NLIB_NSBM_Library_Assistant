@@ -24,7 +24,7 @@ class _SearchResultState extends State<SearchResult> {
         title: Padding(
           padding: EdgeInsets.only(left: Dimentions.width20),
           child: TextHeader(
-            text: "${widget.searchText}",
+            text: widget.searchText,
           ),
         ),
         leading: Padding(
@@ -58,7 +58,7 @@ class _SearchResultState extends State<SearchResult> {
               children: [
                 SizedBox(height: Dimentions.height40),
                 ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: 10,
                     itemBuilder: (context, index) {
@@ -91,7 +91,7 @@ class _SearchResultState extends State<SearchResult> {
               width: Dimentions.width50,
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: Dimentions.height90,
                     width: Dimentions.width40,
                     child: Image.asset(
@@ -113,7 +113,7 @@ class _SearchResultState extends State<SearchResult> {
                     fontColor: AppColors.NORMAL_TEXT_COLOR,
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: Dimentions.width300,
                   child: BoldText(
                     text: 'Harry potter chamber of secrets',

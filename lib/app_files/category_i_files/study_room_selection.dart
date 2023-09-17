@@ -28,7 +28,9 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
             children: [
               Expanded(child: Container()),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(FormIntegrator.getResrvedStudyRoomSelection());
+                },
                 icon: Icon(
                   Icons.app_registration,
                   color: AppColors.BUTTON_COLOR,
@@ -42,7 +44,7 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
             child: Column(
               children: [
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: ((context, index) {
@@ -69,9 +71,9 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
           bottomLeft: Radius.circular(Dimentions.radius5),
           bottomRight: Radius.circular(Dimentions.radius5),
         ),
-        color: Color(0xffE2FFBA),
-        boxShadow: [
-          const BoxShadow(
+        color: const Color(0xffE2FFBA),
+        boxShadow: const [
+          BoxShadow(
             blurRadius: 1,
             color: Colors.grey,
             offset: Offset(0, 2),
