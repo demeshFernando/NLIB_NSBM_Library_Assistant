@@ -63,7 +63,7 @@ class _SignInrState extends State<SignIn> {
                 ),
               ),
             ),
-      
+            
             // Sign In Text
             Padding(
               padding: EdgeInsets.only(
@@ -255,7 +255,6 @@ class _SignInrState extends State<SignIn> {
                   'Sign In',
                   style: TextStyle(color: Colors.green[900]),
                   ),
-                
               ),
             ),
           ],

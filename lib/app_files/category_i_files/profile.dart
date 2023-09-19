@@ -13,6 +13,7 @@ class Profile extends StatefulWidget {
   const Profile({super.key, required this.pageId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _Profile createState() => _Profile();
 }
 
@@ -137,11 +138,9 @@ class _Profile extends State<Profile> {
                     ],
                   ),
                 ),
-                children: [
-                  Container(
-                    child: Center(
-                      child: SmallText(text: 'This is title number 2'),
-                    ),
+                children: const [
+                  Center(
+                    child: SmallText(text: 'This is title number 2'),
                   ),
                 ],
               ),

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/app_files/app_credentials/password_reset_guideliness.dart';
@@ -18,10 +17,13 @@ import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart
 import 'package:nlib_library_assistant/app_files/category_i_files/notification_message.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/notification_new_message.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/profile.dart';
+import 'package:nlib_library_assistant/app_files/category_i_files/reserved_study_room_details.dart';
+import 'package:nlib_library_assistant/app_files/category_i_files/reserved_sudy_rooms.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/search_results.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/study_room_results.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/study_room_selection.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/notification.dart'
+    // ignore: library_prefixes
     as Notification;
 import 'package:nlib_library_assistant/app_files/category_i_files/study_room_userselection.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/user_search_result.dart';
@@ -48,6 +50,10 @@ class FormIntegrator {
   static const String borrowedBookSpecificDetails =
       "/borrowed-book-specific-details";
 
+  static const String reservedStudyRoomSelection =
+      "/reserved-study-room-selection";
+  static const String reservedStudyRoomSelectionDetails =
+      "/reserved-study-room-selection-details";
   static const String studyRoomSelection = "/study-room-selection";
   static const String studyRoomResults = "/study-room-results";
   static const String studyRoomUserSelection = "/study-room-user-selection";
@@ -58,41 +64,45 @@ class FormIntegrator {
   static const String welcomeNote2Category1 = "/welcome-note-2-category-1";
   static const String welcomeNote3Category1 = "/welcome-note-3-category-1";
   static const String passwordResetGuidelines = "/password-reset-guidelines";
-
+  
   static const String wrapper = "/wrapper";
 
+  
   static String getInitial() => "$initial";
   static String getHomePage() => "$homePage";
   static String getProfile(int pageId) => "$profile?pageId=$pageId";
-  static String getNotification() => "$notification";
-  static String getFavouriteBooks() => "$favouriteBooks";
-  static String getUserSettings() => "$userSettings";
-  static String getDashboard() => "$dashboard";
+  static String getNotification() => notification;
+  static String getFavouriteBooks() => favouriteBooks;
+  static String getUserSettings() => userSettings;
+  static String getDashboard() => dashboard;
 
-  static String getNotificationMessage() => "$notificationMessage";
-  static String getNewNotificationMessage() => "$newNotificationMessage";
+  static String getNotificationMessage() => notificationMessage;
+  static String getNewNotificationMessage() => newNotificationMessage;
 
   static String getDynamicBook(int pageId) => "$dynamicBook?pageId=$pageId";
   static String getSearchResults(String bookName) =>
       "$searchResult?bookName=$bookName";
-  static String getBookCategories() => "$bookCategories";
+  static String getBookCategories() => bookCategories;
   static String getBookCategoryResult(int pageId) =>
       "$bookCategoryResult?pageId=$pageId";
-  static String getBorrowedBooks() => "$borrowedBooks";
+  static String getBorrowedBooks() => borrowedBooks;
   static String getBorrowedBookSpecificDetails(int pageId) =>
       "$borrowedBookSpecificDetails?pageId=$pageId";
 
-  static String getStudyRoomSelection() => "$studyRoomSelection";
+  static String getResrvedStudyRoomSelection() => reservedStudyRoomSelection;
+  static String getReservedStudyRoomSelectionDetails() =>
+      reservedStudyRoomSelectionDetails;
+  static String getStudyRoomSelection() => studyRoomSelection;
   static String getStudyRoomResults(int pageId) =>
       "$studyRoomResults?pageId=$pageId";
-  static String getStudyRoomUserSelection() => "$studyRoomUserSelection";
-  static String getUserSearchResult() => "$userSearchResult";
+  static String getStudyRoomUserSelection() => studyRoomUserSelection;
+  static String getUserSearchResult() => userSearchResult;
 
-  static String getSignIn() => "$signIn";
-  static String getWelcomeNote1Category1() => "$welcomeNote1Category1";
-  static String getWelcomeNote2Category1() => "$welcomeNote2Category1";
-  static String getWelcomeNote3Category1() => "$welcomeNote3Category1";
-  static String getPasswordResetGuidelines() => "$passwordResetGuidelines";
+  static String getSignIn() => signIn;
+  static String getWelcomeNote1Category1() => welcomeNote1Category1;
+  static String getWelcomeNote2Category1() => welcomeNote2Category1;
+  static String getWelcomeNote3Category1() => welcomeNote3Category1;
+  static String getPasswordResetGuidelines() => passwordResetGuidelines;
 
   static String getWrapper() => "$wrapper";
 
@@ -101,7 +111,7 @@ class FormIntegrator {
     GetPage(
       name: initial,
       page: () {
-        return SplashScreen();
+        return const SplashScreen();
       },
       transition: Transition.fadeIn,
     ),
@@ -118,7 +128,7 @@ class FormIntegrator {
     GetPage(
       name: homePage,
       page: () {
-        return MainHomePage();
+        return const MainHomePage();
       },
       transition: Transition.fadeIn,
     ),
@@ -151,14 +161,14 @@ class FormIntegrator {
     GetPage(
       name: userSettings,
       page: () {
-        return UserSettings();
+        return const UserSettings();
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: dashboard,
       page: () {
-        return Dashboard();
+        return const Dashboard();
       },
       transition: Transition.fadeIn,
     ),
@@ -180,11 +190,25 @@ class FormIntegrator {
       },
       transition: Transition.fadeIn,
     ),
+    GetPage(
+      name: reservedStudyRoomSelection,
+      page: () {
+        return const ResrvedStudyRooms();
+      },
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: reservedStudyRoomSelectionDetails,
+      page: () {
+        return const ReservedStudyRoomDetails();
+      },
+      transition: Transition.fadeIn,
+    ),
     //study room selection
     GetPage(
       name: studyRoomSelection,
       page: () {
-        return StudyRoomSelection();
+        return const StudyRoomSelection();
       },
       transition: Transition.fadeIn,
     ),
@@ -199,21 +223,21 @@ class FormIntegrator {
     GetPage(
       name: studyRoomUserSelection,
       page: () {
-        return StudyRoomUserSelection();
+        return const StudyRoomUserSelection();
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: userSearchResult,
       page: () {
-        return UserSearchResult();
+        return const UserSearchResult();
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: signIn,
       page: () {
-        return SignIn();
+        return const SignIn();
       },
       transition: Transition.fadeIn,
     ),
@@ -221,7 +245,7 @@ class FormIntegrator {
     GetPage(
       name: welcomeNote1Category1,
       page: () {
-        return Category1WelcomeNote1();
+        return const Category1WelcomeNote1();
       },
       transition: Transition.fadeIn,
     ),
@@ -229,7 +253,7 @@ class FormIntegrator {
     GetPage(
       name: welcomeNote2Category1,
       page: () {
-        return Category1WelcomeNote2();
+        return const Category1WelcomeNote2();
       },
       transition: Transition.fadeIn,
     ),
@@ -237,7 +261,7 @@ class FormIntegrator {
     GetPage(
       name: welcomeNote3Category1,
       page: () {
-        return Category1WelcomeNote3();
+        return const Category1WelcomeNote3();
       },
       transition: Transition.fadeIn,
     ),
@@ -245,14 +269,14 @@ class FormIntegrator {
     GetPage(
       name: passwordResetGuidelines,
       page: () {
-        return PasswordResetGuideliness();
+        return const PasswordResetGuideliness();
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: bookCategories,
       page: () {
-        return BookCategories();
+        return const BookCategories();
       },
       transition: Transition.fadeIn,
     ),
@@ -269,7 +293,7 @@ class FormIntegrator {
     GetPage(
       name: borrowedBooks,
       page: () {
-        return BorrowedBooks();
+        return const BorrowedBooks();
       },
       transition: Transition.fadeIn,
     ),
@@ -292,7 +316,7 @@ class FormIntegrator {
     GetPage(
         name: newNotificationMessage,
         page: () {
-          return NotificationNewMessage();
+          return const NotificationNewMessage();
         })
   ];
 }

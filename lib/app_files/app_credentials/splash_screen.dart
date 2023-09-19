@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import '../../utils/dimentions.dart';
 //import 'loginstudent.dart';
@@ -29,7 +28,7 @@ class _SplashScreen extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: Dimentions.width250,
           height: Dimentions.height250,
           child: Image.asset(
