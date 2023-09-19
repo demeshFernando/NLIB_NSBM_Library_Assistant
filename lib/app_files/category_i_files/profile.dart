@@ -146,14 +146,19 @@ class _Profile extends State<Profile> {
               ),
               SizedBox(height: Dimentions.height50),
               buttonTiles(
-                  icon: Icons.favorite,
-                  titleText: 'My Favourite',
-                  buttonIndex: 0),
+                icon: Icons.favorite,
+                titleText: 'My Favourite',
+                onPressed: () {
+                  Get.toNamed(FormIntegrator.getFavouriteBooks());
+                },
+              ),
               SizedBox(height: Dimentions.height30),
               buttonTiles(
                   icon: Icons.notifications_none,
                   titleText: 'Notification',
-                  buttonIndex: 1,
+                  onPressed: () {
+                    Get.toNamed(FormIntegrator.getNotification());
+                  },
                   isCountNotificationShowable: true,
                   notificationCount: '99'),
               SizedBox(height: Dimentions.height30),
@@ -168,16 +173,12 @@ class _Profile extends State<Profile> {
   Widget buttonTiles(
       {required IconData icon,
       required String titleText,
-      required int buttonIndex,
+      required VoidCallback onPressed,
       bool isCountNotificationShowable = false,
       String notificationCount = "2"}) {
     return InkWell(
       onTap: () {
-        if (buttonIndex == 0) {
-          Get.toNamed(FormIntegrator.getFavouriteBooks());
-        } else if (buttonIndex == 1) {
-          Get.toNamed(FormIntegrator.getNotification());
-        }
+        onPressed;
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: containerPadding),

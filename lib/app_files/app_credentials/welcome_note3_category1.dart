@@ -54,7 +54,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
             SizedBox(height: Dimentions.height30),
             GestureDetector(
               onTap: () {
-                Get.toNamed(FormIntegrator.getDashboard());
+                Get.toNamed(FormIntegrator.getDashboard(0));
               },
               child: RoundButton(
                   buttonText: 'Start Using', buttonWidth: Dimentions.width200),

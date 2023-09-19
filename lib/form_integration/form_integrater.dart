@@ -70,7 +70,8 @@ class FormIntegrator {
   static String getNotification() => notification;
   static String getFavouriteBooks() => favouriteBooks;
   static String getUserSettings() => userSettings;
-  static String getDashboard() => dashboard;
+  static String getDashboard(int currentTab) =>
+      "$dashboard?currentTab=$currentTab";
 
   static String getNotificationMessage() => notificationMessage;
   static String getNewNotificationMessage() => newNotificationMessage;
@@ -153,7 +154,8 @@ class FormIntegrator {
     GetPage(
       name: dashboard,
       page: () {
-        return const Dashboard();
+        var focusingTab = Get.parameters["currentTab"];
+        return Dashboard(currentTab: int.parse(focusingTab!));
       },
       transition: Transition.fadeIn,
     ),

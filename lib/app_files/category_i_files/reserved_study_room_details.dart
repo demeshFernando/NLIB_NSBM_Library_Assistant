@@ -37,7 +37,7 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.toNamed(FormIntegrator.getDashboard());
+                Get.toNamed(FormIntegrator.getDashboard(1));
               },
               icon: Icon(
                 Icons.cancel,

@@ -12,17 +12,21 @@ import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  int currentTab;
+  Dashboard({super.key, required this.currentTab});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DashboardState createState() => _DashboardState();
+  // ignore: library_private_types_in_public_api, no_logic_in_create_state
+  _DashboardState createState() => _DashboardState(tabIndex: currentTab);
 }
 
 class _DashboardState extends State<Dashboard> {
+  int tabIndex;
+  _DashboardState({required this.tabIndex});
   final searchBookcontroller = TextEditingController();
-  int currentTab = 0;
+
   final List<Widget> screens = [
     const MainHomePage(),
     const StudyRoomSelection(),
@@ -31,6 +35,17 @@ class _DashboardState extends State<Dashboard> {
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const MainHomePage();
+
+  @override
+  void initState() {
+    super.initState();
+    currentScreen = widget.currentTab == 0
+        ? const MainHomePage()
+        : (widget.currentTab == 1
+            ? const StudyRoomSelection()
+            : const BorrowedBooks());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +170,7 @@ class _DashboardState extends State<Dashboard> {
                       onPressed: () {
                         setState(() {
                           currentScreen = const MainHomePage();
-                          currentTab = 0;
+                          widget.currentTab = 0;
                         });
                       },
                       child: Column(
@@ -163,13 +178,13 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           Icon(
                             Icons.home,
-                            color: currentTab == 0
+                            color: widget.currentTab == 0
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           ),
                           BoldText(
                             text: 'Home',
-                            fontColor: currentTab == 0
+                            fontColor: widget.currentTab == 0
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           )
@@ -181,7 +196,7 @@ class _DashboardState extends State<Dashboard> {
                       onPressed: () {
                         setState(() {
                           currentScreen = const StudyRoomSelection();
-                          currentTab = 1;
+                          widget.currentTab = 1;
                         });
                       },
                       child: Column(
@@ -189,13 +204,13 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           Icon(
                             Icons.library_add,
-                            color: currentTab == 1
+                            color: widget.currentTab == 1
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           ),
                           BoldText(
                             text: 'Halls',
-                            fontColor: currentTab == 1
+                            fontColor: widget.currentTab == 1
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           )
@@ -207,7 +222,7 @@ class _DashboardState extends State<Dashboard> {
                       onPressed: () {
                         setState(() {
                           currentScreen = const BorrowedBooks();
-                          currentTab = 2;
+                          widget.currentTab = 2;
                         });
                       },
                       child: Column(
@@ -215,13 +230,13 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           Icon(
                             Icons.book,
-                            color: currentTab == 2
+                            color: widget.currentTab == 2
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           ),
                           BoldText(
                             text: 'Books',
-                            fontColor: currentTab == 2
+                            fontColor: widget.currentTab == 2
                                 ? AppColors.BUTTON_COLOR
                                 : AppColors.CONTAINER_GRAY,
                           )

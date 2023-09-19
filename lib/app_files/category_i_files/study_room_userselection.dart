@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
+import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
@@ -35,7 +38,16 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.toNamed(FormIntegrator.getDashboard());
+                //trowing a warning message
+                DialogBox warningMessage = DialogBox(
+                    context: context,
+                    title: "Are you sure",
+                    description:
+                        "This cancelation will remove all saved messages and reserved files. So please confirm the message again. confirm it again.",
+                    onPressed: () {
+                      Get.toNamed(FormIntegrator.getDashboard(1));
+                    });
+                warningMessage.warningDialogBox();
               },
               icon: Icon(
                 Icons.cancel,
@@ -162,7 +174,7 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
               onPressed: () {},
               child: BoldText(
                 text: 'Request the hall',
-                fontColor: AppColors.LINK_TEXT_COLOR,
+                fontColor: AppColors.BUTTON_COLOR,
               ),
             )
           ],
