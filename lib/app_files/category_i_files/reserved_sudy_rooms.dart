@@ -6,13 +6,15 @@ import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
-class BorrowedBooks extends StatefulWidget {
-  const BorrowedBooks({super.key});
+class ResrvedStudyRooms extends StatefulWidget {
+  const ResrvedStudyRooms({super.key});
 
-  _BorrowedBooks createState() => _BorrowedBooks();
+  @override
+  // ignore: library_private_types_in_public_api
+  _ResrvedStudyRoomState createState() => _ResrvedStudyRoomState();
 }
 
-class _BorrowedBooks extends State<BorrowedBooks> {
+class _ResrvedStudyRoomState extends State<ResrvedStudyRooms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +30,13 @@ class _BorrowedBooks extends State<BorrowedBooks> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Reserved Study Rooms'),
+        title: const TextHeader(text: 'Reserved Study Rooms'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: ((context, index) {
@@ -49,12 +51,12 @@ class _BorrowedBooks extends State<BorrowedBooks> {
   Widget listContainer(int pageId) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(FormIntegrator.getBorrowedBookSpecificDetails(pageId));
+        Get.toNamed(FormIntegrator.getReservedStudyRoomSelectionDetails());
       },
       child: Container(
         width: double.infinity,
         height: Dimentions.height100,
-        margin: EdgeInsets.only(left: 15, right: 15),
+        margin: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -78,7 +80,7 @@ class _BorrowedBooks extends State<BorrowedBooks> {
                 SizedBox(height: Dimentions.height10),
                 SizedBox(
                   width: Dimentions.width150,
-                  child: Center(
+                  child: const Center(
                       child: SmallText(
                     text: 'Hall ID: ',
                     maxLines: 2,

@@ -6,11 +6,17 @@ import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable, camel_case_types
 class notification extends StatefulWidget {
   var tileNotification = <bool>[true, true, true, false, false, false];
+
+  notification({super.key});
+  @override
+  // ignore: library_private_types_in_public_api
   _notificationState createState() => _notificationState();
 }
 
+// ignore: camel_case_types
 class _notificationState extends State<notification> {
   @override
   Widget build(BuildContext context) {
@@ -28,6 +34,7 @@ class _notificationState extends State<notification> {
             color: AppColors.ICON_WHITE,
           ),
         ),
+        // ignore: prefer_const_constructors
         title: TextHeader(text: 'Notifications'),
       ),
       body: SingleChildScrollView(
@@ -35,7 +42,7 @@ class _notificationState extends State<notification> {
           children: [
             SizedBox(height: Dimentions.height10),
             ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: widget.tileNotification.length,
                 itemBuilder: (context, index) {
@@ -133,9 +140,9 @@ class _notificationState extends State<notification> {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 width: Dimentions.width300,
-                child: SmallText(
+                child: const SmallText(
                   text: 'the element of style message will be displayed here.',
                   maxLines: 2,
                 ),
@@ -211,9 +218,9 @@ class _notificationState extends State<notification> {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 width: Dimentions.width300,
-                child: SmallText(
+                child: const SmallText(
                   text: 'the element of style message will be displayed here.',
                   maxLines: 2,
                 ),

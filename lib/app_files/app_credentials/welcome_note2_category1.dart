@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 
 import '../../utils/dimentions.dart';
@@ -21,12 +20,12 @@ class Category1WelcomeNote2 extends StatelessWidget {
             WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/2.png"),
             SizedBox(height: Dimentions.height25),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Save Your',
               ),
             ),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Favorite Book',
               ),
@@ -34,7 +33,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
             SizedBox(height: Dimentions.height25),
             Padding(
               padding: EdgeInsets.all(Dimentions.height5),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SmallText(
@@ -50,7 +49,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
             ),
             SizedBox(height: Dimentions.height30),
             // Add spacing between text and button
-            DotsIndicatorContainers(changingNumber: 1),
+            const DotsIndicatorContainers(changingNumber: 1),
 
             SizedBox(height: Dimentions.height30),
             GestureDetector(

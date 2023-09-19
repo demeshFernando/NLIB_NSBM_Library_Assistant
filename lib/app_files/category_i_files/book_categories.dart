@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import '../../widgets/text_formatter.dart';
@@ -9,6 +8,8 @@ import '../../utils/app_colors.dart';
 class BookCategories extends StatefulWidget {
   const BookCategories({super.key});
 
+  @override
+  // ignore: library_private_types_in_public_api
   _BookCategories createState() => _BookCategories();
 }
 
@@ -29,14 +30,14 @@ class _BookCategories extends State<BookCategories> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Book categories'),
+        title: const TextHeader(text: 'Book categories'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: Dimentions.height40),
             ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 6,
                 itemBuilder: ((context, index) {
@@ -83,10 +84,10 @@ class _BookCategories extends State<BookCategories> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: Dimentions.width150,
             height: Dimentions.height50,
-            child: Center(
+            child: const Center(
               child: BoldText(text: "Engineering"),
             ),
           ),

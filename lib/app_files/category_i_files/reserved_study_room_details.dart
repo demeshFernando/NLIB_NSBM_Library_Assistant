@@ -7,12 +7,16 @@ import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
-class StudyRoomUserSelection extends StatefulWidget {
+class ReservedStudyRoomDetails extends StatefulWidget {
+  const ReservedStudyRoomDetails({super.key});
+
   @override
-  _StudyRoomUserSelectionState createState() => _StudyRoomUserSelectionState();
+  // ignore: library_private_types_in_public_api
+  _ReservedStudyRoomDetailsState createState() =>
+      _ReservedStudyRoomDetailsState();
 }
 
-class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
+class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +33,7 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'User Selection'),
+        title: const TextHeader(text: 'User Selection'),
         actions: [
           IconButton(
               onPressed: () {
@@ -83,7 +87,7 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
             margin: EdgeInsets.all(Dimentions.height10),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                         hintText: 'Search Students using index/name'),
@@ -107,7 +111,7 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
               child: Column(
                 children: [
                   ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 20,
                       itemBuilder: ((context, index) => addedStudentTile())),
@@ -123,11 +127,9 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-                child: Container(
-              child: BoldText(
-                text: 'Total student selection: 20',
-                fontSize: Dimentions.font16,
-              ),
+                child: BoldText(
+              text: 'Total student selection: 20',
+              fontSize: Dimentions.font16,
             )),
             GestureDetector(
               onTap: () {
@@ -179,9 +181,10 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
                         fontSize: Dimentions.font16,
                       ),
                       SizedBox(height: Dimentions.height5),
-                      SmallText(text: 'BSC (HONS) in software engineering'),
-                      SmallText(text: '22863'),
-                      SmallText(text: 'batch: 21.1'),
+                      const SmallText(
+                          text: 'BSC (HONS) in software engineering'),
+                      const SmallText(text: '22863'),
+                      const SmallText(text: 'batch: 21.1'),
                     ],
                   ),
                 ),

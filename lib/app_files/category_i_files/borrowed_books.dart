@@ -9,6 +9,8 @@ import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 class BorrowedBooks extends StatefulWidget {
   const BorrowedBooks({super.key});
 
+  @override
+  // ignore: library_private_types_in_public_api
   _BorrowedBooks createState() => _BorrowedBooks();
 }
 
@@ -19,7 +21,7 @@ class _BorrowedBooks extends State<BorrowedBooks> {
       child: Column(
         children: [
           ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 10,
               itemBuilder: ((context, index) {
@@ -38,7 +40,7 @@ class _BorrowedBooks extends State<BorrowedBooks> {
       child: Container(
         width: double.infinity,
         height: Dimentions.height100,
-        margin: EdgeInsets.only(left: 15, right: 15),
+        margin: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -63,7 +65,7 @@ class _BorrowedBooks extends State<BorrowedBooks> {
                 SizedBox(height: Dimentions.height10),
                 SizedBox(
                   width: Dimentions.width150,
-                  child: Center(
+                  child: const Center(
                       child: SmallText(
                     text: 'kathy sierra, checking the overlowing cabaility',
                     maxLines: 2,
