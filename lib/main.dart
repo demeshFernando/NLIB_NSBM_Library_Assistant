@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.BASE_COLOR),
           useMaterial3: true,
         ),
-      home: const SplashScreen(),
+      home: const Wrapper(),
       initialRoute: FormIntegrator.initial,
       getPages: FormIntegrator.routes,
       ),

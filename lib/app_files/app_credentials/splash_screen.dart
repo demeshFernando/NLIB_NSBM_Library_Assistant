@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
-import 'package:nlib_library_assistant/utils/app_colors.dart';
 import '../../utils/dimentions.dart';
 //import 'loginstudent.dart';
 
@@ -22,7 +21,7 @@ class _SplashScreen extends State<SplashScreen> {
 
   void _navigateToHome() async {
     Future.delayed(Duration(milliseconds: 1500), () {
-      Get.offAllNamed(FormIntegrator.getSignIn());
+      Get.offAllNamed(FormIntegrator.getWrapper());
     });
   }
 
