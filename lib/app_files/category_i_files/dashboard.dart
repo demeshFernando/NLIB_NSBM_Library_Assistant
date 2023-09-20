@@ -34,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SlidDrawer(),
+      drawer: SlidDrawer(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: Dimentions.height80,
