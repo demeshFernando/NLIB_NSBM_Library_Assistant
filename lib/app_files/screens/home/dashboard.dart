@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books.dart';
+import 'package:nlib_library_assistant/app_files/screens/home/borrowed_books.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/drawer.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/favourite_page.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart';
