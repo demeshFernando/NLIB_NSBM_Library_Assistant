@@ -112,14 +112,14 @@ class _MainHomePage extends State<MainHomePage> {
             //book search page
             mainCard(
               cardIndex: 1,
-              mainHeader: 'Search Book',
+              mainHeader: 'Explore Books',
               description:
                   'You can search a book title and check whether the book is available.',
               buttonText: 'Search',
               imageUrl: "./asset/home_images/1.png",
               bottom: Dimentions.height100,
               pictureContainerHeight: Dimentions.height200,
-              isButtonShow: false,
+              isButtonShow: true,
             ),
             SizedBox(height: Dimentions.height20),
 
@@ -211,7 +211,10 @@ class _MainHomePage extends State<MainHomePage> {
                               ? GestureDetector(
                                   onTap: () {
                                     if (cardIndex == 0) {
-                                    } else if (cardIndex == 2) {
+                                    } else if (cardIndex == 1) {
+                                      Get.toNamed(FormIntegrator
+                                          .getBookCategories());
+                                    }else if (cardIndex == 2) {
                                       Get.toNamed(FormIntegrator
                                           .getStudyRoomSelection());
                                     }

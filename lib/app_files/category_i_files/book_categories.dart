@@ -6,6 +6,14 @@ import 'package:nlib_library_assistant/utils/dimentions.dart';
 import '../../widgets/text_formatter.dart';
 import '../../utils/app_colors.dart';
 
+class BookCategory {
+  final String name;
+  final String imageAssetPath;
+
+  BookCategory(this.name, this.imageAssetPath);
+}
+
+
 class BookCategories extends StatefulWidget {
   const BookCategories({super.key});
 
@@ -13,6 +21,19 @@ class BookCategories extends StatefulWidget {
 }
 
 class _BookCategories extends State<BookCategories> {
+
+  List<BookCategory> categories = [
+  BookCategory("Engineering", "asset/books/book_category/Engineering.jpg"),
+  BookCategory("Biological Sciences", "asset/books/book_category/biologicalsciences.png"),
+  BookCategory("Computer Science", "asset/books/book_category/ComputerScience.jpg"),
+  BookCategory("Accounting", "asset/books/book_category/Accounting.jpg"),
+  BookCategory("Finance", "asset/books/book_category/Finance.jpg"),
+  BookCategory("Law", "asset/books/book_category/Law.jpg"),
+
+  // Add more categories here
+];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +59,14 @@ class _BookCategories extends State<BookCategories> {
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 6,
+                itemCount: categories.length,
                 itemBuilder: ((context, index) {
                   return Container(
                     margin: EdgeInsets.all(Dimentions.height10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        categoryCard(index),
+                        categoryCard(index,categories[index]),
                       ],
                     ),
                   );
@@ -56,12 +77,12 @@ class _BookCategories extends State<BookCategories> {
     );
   }
 
-  Widget categoryCard(int pageIndex) {
+  Widget categoryCard(int pageIndex,BookCategory category) {
     return Container(
       width: Dimentions.width300,
       height: Dimentions.height300,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimentions.radius10),
+          borderRadius: BorderRadius.circular(Dimentions.radius30),
           color: AppColors.BASE_COLOR),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +99,7 @@ class _BookCategories extends State<BookCategories> {
                   borderRadius: BorderRadius.circular(Dimentions.radius10),
                   color: AppColors.CONTAINER_WHITE),
               child: Image.asset(
-                "asset/books/book_category/default.png",
+                category.imageAssetPath,
                 fit: BoxFit.cover,
               ),
             ),
@@ -87,7 +108,7 @@ class _BookCategories extends State<BookCategories> {
             width: Dimentions.width150,
             height: Dimentions.height50,
             child: Center(
-              child: BoldText(text: "Engineering"),
+              child: BoldText(text: category.name),
             ),
           ),
         ],

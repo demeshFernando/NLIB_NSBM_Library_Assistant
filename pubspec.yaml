@@ -83,7 +83,12 @@ flutter:
     - asset/books/default.png
     - asset/profile/default.png
     - asset/books/book_category/default.png
-    
+    - asset/books/book_category/biologicalsciences.png
+    - asset/books/book_category/Engineering.jpg
+    - asset/books/book_category/ComputerScience.jpg
+    - asset/books/book_category/Accounting.jpg
+    - asset/books/book_category/Finance.jpg
+    - asset/books/book_category/Law.jpg
     
 
   #   - images/a_dot_ham.jpeg
