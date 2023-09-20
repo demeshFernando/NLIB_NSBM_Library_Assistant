@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/app_files/services/auth.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
@@ -10,7 +11,10 @@ import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 import '../../widgets/rounded_button.dart';
 
 class SlidDrawer extends StatelessWidget {
-  const SlidDrawer({super.key});
+
+  final AuthService _auth = AuthService();
+
+  SlidDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +71,12 @@ class SlidDrawer extends StatelessWidget {
                     });
                 warningDialog.warningDialogBox();
               },
-              child: const RoundButton(
-                buttonText: 'LogOut',
-              ),
+              child: ElevatedButton(
+                onPressed: () async{
+                  await _auth.signOut();
+                },
+                 child: Text("Sign Out"),
+                 ),
             ),
           ),
         ],

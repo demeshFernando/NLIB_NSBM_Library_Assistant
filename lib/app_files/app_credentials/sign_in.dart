@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:nlib_library_assistant/app_files/services/auth.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
@@ -7,6 +9,7 @@ import '../../utils/dimentions.dart';
 
 import '../../widgets/rounded_button.dart';
 import '../../widgets/text_formatter.dart';
+import '../shared/loading.dart';
 //import 'started1.dart';
 
 class SignIn extends StatefulWidget {
@@ -17,6 +20,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInrState extends State<SignIn> {
+
   bool rememberMe = true, isPasswordVisibilityStatus = false;
   FocusNode usernameFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
@@ -29,10 +33,21 @@ class _SignInrState extends State<SignIn> {
     usernameFocusNode.requestFocus();
   }
 
+  //instance of the auth service
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
+  //text field state
+  String username = '';
+  String password = '';
+  String error = '';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return loading ? Loading():Scaffold(
+      body: Form(
+        key: _formKey,
         child: Column(
           children: [
             // Logo
@@ -48,7 +63,7 @@ class _SignInrState extends State<SignIn> {
                 ),
               ),
             ),
-
+            
             // Sign In Text
             Padding(
               padding: EdgeInsets.only(
@@ -61,56 +76,59 @@ class _SignInrState extends State<SignIn> {
                 ),
               ),
             ),
-
+      
             SizedBox(height: Dimentions.height20),
-
+      
             // Student Email Text Field
             Container(
-              width: double.maxFinite,
               padding: EdgeInsets.symmetric(
                 horizontal: Dimentions.width35,
               ),
-              child: TextField(
+              child: TextFormField(
                 controller: usernameController,
                 focusNode: usernameFocusNode,
                 decoration: InputDecoration(
                   fillColor: AppColors.BASE_COLOR,
                   filled: true,
-                  hintText: 'index / Email',
+                  hintText: 'username',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: AppColors.BASE_COLOR,
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                   ),
-                  prefixIcon: const Icon(Icons.email),
+                  prefixIcon: const Icon(Icons.person),
                 ),
+                onChanged: (value){
+                  setState((){
+                    username = value;
+                  });
+                },
               ),
             ),
-
+      
             SizedBox(height: Dimentions.height20),
-
+      
             // Password Text Field
             Container(
-              width: double.maxFinite,
               padding: EdgeInsets.symmetric(
                 horizontal: Dimentions.width35,
               ),
-              child: TextField(
+              child: TextFormField(
                 controller: passwordController,
                 focusNode: passwordFocusNode,
                 obscureText: !isPasswordVisibilityStatus ? true : false,
                 decoration: InputDecoration(
                   fillColor: AppColors.BASE_COLOR,
                   filled: true,
-                  hintText: 'Your password',
+                  hintText: 'Password',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: AppColors.BASE_COLOR,
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                   ),
-                  prefixIcon: const Icon(Icons.private_connectivity_sharp),
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -122,14 +140,18 @@ class _SignInrState extends State<SignIn> {
                           ? Icons.visibility
                           : Icons.visibility_off)),
                 ),
+                onChanged: (value){
+                  setState(() {
+                    password = value;
+                  });
+                }
               ),
             ),
-
+      
             SizedBox(height: Dimentions.height20),
-
+      
             // Remember Me and Forgot Password
             Container(
-              width: double.maxFinite,
               padding: EdgeInsets.symmetric(horizontal: Dimentions.width15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -145,7 +167,7 @@ class _SignInrState extends State<SignIn> {
                         },
                         activeColor: AppColors.BASE_COLOR,
                       ),
-                      const SmallText(
+                      SmallText(
                         text: 'Remember Me',
                       ),
                     ],
@@ -162,23 +184,24 @@ class _SignInrState extends State<SignIn> {
                 ],
               ),
             ),
-
+      
             SizedBox(height: Dimentions.height20),
-
+      
             // Sign In Button
             GestureDetector(
               onTap: () {
+                print(
+                    "username is: ${usernameController.text} and password is: ${passwordController.text}");
                 //special entry
-                if (usernameController.text == "" &&
-                    passwordController.text == "") {
+                if (usernameController.text != "" &&
+                    passwordController.text != "") {
                   Get.toNamed(FormIntegrator.getWelcomeNote1Category1());
                 }
-
+      
                 //if the username field is empty
                 else if (usernameController.text == "") {
                   warningMessage(
-                      context, "Error", "Username field cannot kept empty.",
-                      () {
+                      context, "Error", "Username field cannot kept empty.", () {
                     usernameFocusNode.requestFocus();
                   });
                 }
@@ -206,9 +229,32 @@ class _SignInrState extends State<SignIn> {
                   });
                 }
               },
-              child: RoundButton(
-                buttonText: 'Sign In',
-                buttonWidth: Dimentions.width200,
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
+                    dynamic result = await _auth.signInWithEmailAndPassword(username, password);
+                    if(result == null){
+                      setState(() {
+                        error = 'Could not sign in with those credentials';
+                        loading = false;
+                      });
+                    
+                    }
+                  }
+                },
+                 style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.BASE_COLOR,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(color: Colors.green[900]),
+                  ),
               ),
             ),
           ],
