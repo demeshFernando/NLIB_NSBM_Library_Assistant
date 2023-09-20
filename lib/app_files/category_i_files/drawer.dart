@@ -74,6 +74,7 @@ class SlidDrawer extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async{
                   await _auth.signOut();
+                  Get.toNamed(FormIntegrator.signIn);
                 },
                  child: Text("Sign Out"),
                  ),

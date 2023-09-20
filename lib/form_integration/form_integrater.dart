@@ -9,8 +9,8 @@ import 'package:nlib_library_assistant/app_files/app_credentials/welcome_note3_c
 import 'package:nlib_library_assistant/app_files/category_i_files/book_categories.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/book_category_results.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_book_specific_details.dart';
-import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books.dart';
-import 'package:nlib_library_assistant/app_files/category_i_files/dashboard.dart';
+import 'package:nlib_library_assistant/app_files/screens/home/borrowed_books.dart';
+import 'package:nlib_library_assistant/app_files/screens/home/dashboard.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/dynamic_book.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/favourite_page.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart';
