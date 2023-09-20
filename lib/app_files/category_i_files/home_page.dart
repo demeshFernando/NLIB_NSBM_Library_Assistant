@@ -5,7 +5,6 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import '../../utils/dimentions.dart';
 import '../../widgets/rounded_button.dart';
-import './drawer.dart';
 import '../../utils/app_colors.dart';
 import '../../widgets/text_formatter.dart';
 
@@ -36,6 +35,7 @@ class _MainHomePage extends State<MainHomePage> {
   }
 
   //and after the needs are done we need to clear them as soon as possible
+  @override
   void dispose() {
     pageController.dispose();
   }
@@ -72,7 +72,7 @@ class _MainHomePage extends State<MainHomePage> {
             SizedBox(height: Dimentions.height40),
 
             //heading messages as advertisments
-            Container(
+            SizedBox(
               //color: Colors.redAccent,
               height: _height,
               child: PageView.builder(
@@ -83,7 +83,7 @@ class _MainHomePage extends State<MainHomePage> {
                   }),
             ),
 
-            new DotsIndicator(
+            DotsIndicator(
               dotsCount: 5,
               position: _currentPageValue,
               decorator: DotsDecorator(
@@ -101,7 +101,7 @@ class _MainHomePage extends State<MainHomePage> {
               cardIndex: 0,
               mainHeader: 'Seat Count',
               description:
-                  'Check wetherh your seat ready and available before visiting inside the library',
+                  'Check whether your seat ready and available before visiting inside the library',
               buttonText: 'Refresh',
               imageUrl: "./asset/home_images/1.png",
               bottom: Dimentions.height100,
@@ -162,7 +162,7 @@ class _MainHomePage extends State<MainHomePage> {
             children: [
               //book search picture
               Container(
-                margin: EdgeInsets.all(1),
+                margin: const EdgeInsets.all(1),
                 height: pictureContainerHeight == 300
                     ? Dimentions.height300
                     : pictureContainerHeight,
@@ -176,7 +176,7 @@ class _MainHomePage extends State<MainHomePage> {
               ),
               //book search discription
               Container(
-                margin: EdgeInsets.all(1),
+                margin: const EdgeInsets.all(1),
                 height: Dimentions.height250,
                 width: Dimentions.width350,
                 decoration: BoxDecoration(
@@ -243,7 +243,7 @@ class _MainHomePage extends State<MainHomePage> {
   }
 
   Widget _buildPageItem(int index) {
-    Matrix4 matrix = new Matrix4.identity();
+    Matrix4 matrix = Matrix4.identity();
     if (index == _currentPageValue.floor()) {
       //using this simple math we are trying to get what is active and what is not
       //for example let's say that we are in the index = 0 page so for that page
@@ -308,7 +308,7 @@ class _MainHomePage extends State<MainHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BoldText(text: 'name of the author'),
+                  const BoldText(text: 'name of the author'),
                   TextHeader(
                       text: 'name of the author and the title is be here.',
                       fontColor: AppColors.NORMAL_TEXT_COLOR),

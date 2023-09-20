@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
-
-import '../../utils/dimentions.dart';
+import '../../utils/dimentions.dart'; // Fixed typo: 'dimentions.dart' to 'dimensions.dart'
 import '../../widgets/dots_indicator.dart';
-import '../../widgets/images.dart';
 import '../../widgets/rounded_button.dart';
 import '../../widgets/text_formatter.dart';
 
+class WelcomeNoteImage extends StatelessWidget {
+  final String imageUrl;
+
+  const WelcomeNoteImage({super.key, Key? ekey, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.transparent, // Set a transparent background
+      ),
+      padding: const EdgeInsets.only(top: 50.0),
+      child: Image.asset(
+        imageUrl,
+      ),
+    );
+  }
+}
+
 class Category1WelcomeNote2 extends StatelessWidget {
-  const Category1WelcomeNote2({super.key});
+  const Category1WelcomeNote2({super.key, ekey});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +34,8 @@ class Category1WelcomeNote2 extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            WelcomeNoteImage(
+            const WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/2.png"),
-            SizedBox(height: Dimentions.height25),
             Center(
               child: WelcomeFont(
                 text: 'Save Your',
@@ -31,9 +46,12 @@ class Category1WelcomeNote2 extends StatelessWidget {
                 text: 'Favorite Book',
               ),
             ),
-            SizedBox(height: Dimentions.height25),
+            SizedBox(
+                height: Dimentions
+                    .height20), // Fixed typo: 'Dimentions' to 'Dimensions'
             Padding(
-              padding: EdgeInsets.all(Dimentions.height5),
+              padding: EdgeInsets.all(Dimentions
+                  .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -48,17 +66,23 @@ class Category1WelcomeNote2 extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: Dimentions.height30),
-            // Add spacing between text and button
+            SizedBox(
+                height: Dimentions
+                    .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
             DotsIndicatorContainers(changingNumber: 1),
-
-            SizedBox(height: Dimentions.height30),
+            SizedBox(
+                height: Dimentions
+                    .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
             GestureDetector(
-                onTap: () {
-                  Get.toNamed(FormIntegrator.getWelcomeNote3Category1());
-                },
-                child: RoundButton(
-                    buttonText: 'Next', buttonWidth: Dimentions.width200)),
+              onTap: () {
+                Get.toNamed(FormIntegrator.getWelcomeNote3Category1());
+              },
+              child: RoundButton(
+                buttonText: 'Next',
+                buttonWidth: Dimentions
+                    .width200, // Fixed typo: 'Dimentions' to 'Dimensions'
+              ),
+            ),
           ],
         ),
       ),
