@@ -49,16 +49,48 @@ class _DashboardState extends State<Dashboard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Builder(
+  builder: (BuildContext context) {
+    return Container(
+      width: 70, // Set the desired width
+      height: 50, // Set the desired height
+      child: IconButton(
+        icon: const Icon(
+          Icons.menu, // Hamburger menu icon
+          color: Colors.white,
+          size: 30, // Set the desired size of the icon
+        ),
+        onPressed: () {
+          Scaffold.of(context).openDrawer(); // Open the drawer
+        },
+      ),
+    );
+  },
+),
+
                       Expanded(
-                        child: TextField(
-                          controller: searchBookcontroller,
-                          decoration: InputDecoration(
-                              hintText: 'Search here',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              )),
-                        ),
-                      ),
+  child: TextField(
+    controller: searchBookcontroller,
+    //style: const TextStyle(color: Colors.white), // Set text color to white
+    decoration: InputDecoration(
+      hintText: 'Search a book',
+      hintStyle: const TextStyle(color: Colors.white), 
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+          color: Color.fromARGB(255, 20, 158, 2), // Replace 'yourCustomColor' with your desired color
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+          color: Colors.transparent, // Replace 'yourCustomColor' with your desired color
+        ),
+      ),
+    ),
+  ),
+),
+
                       Row(
                         children: [
                           Container(
@@ -70,7 +102,8 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             child: IconButton(
                               icon: Icon(Icons.search),
-                              iconSize: Dimentions.icon24,
+                              color: Colors.white,
+                              iconSize: Dimentions.icon35,
                               onPressed: () {
                                 //if there is not text available
                                 if (searchBookcontroller.text == "") {
@@ -92,10 +125,12 @@ class _DashboardState extends State<Dashboard> {
                           Builder(builder: (context) {
                             return InkWell(
                               onTap: () {
-                                Scaffold.of(context).openDrawer();
+                                 Get.toNamed(FormIntegrator.getProfile(1));
                               },
-                              child: CircleAvatar(
-                                radius: Dimentions.radius25,
+                              child: Container(
+                                width: 60, 
+                                child: CircleAvatar(
+                                radius: Dimentions.radius20,
                                 backgroundColor: AppColors.CONTAINER_WHITE,
                                 child: ClipOval(
                                   child: Image.asset(
@@ -103,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
+                              ),)
                             );
                           }),
                         ],
@@ -136,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        notchMargin: 10,
+        notchMargin: 100,
         child: Container(
           height: Dimentions.height60,
           child: Row(
