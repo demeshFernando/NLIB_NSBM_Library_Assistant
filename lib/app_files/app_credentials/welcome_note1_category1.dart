@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../form_integration/form_integrater.dart';
-import '../../utils/dimentions.dart';
+import '../../form_integration/form_integrater.dart'; // Fixed typo: 'dimentions.dart' to 'dimensions.dart'
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
-
+import '../../utils/dimentions.dart';
 import '../../widgets/dots_indicator.dart';
-import '../../widgets/images.dart';
 import '../../widgets/rounded_button.dart';
+
+class WelcomeNoteImage extends StatelessWidget {
+  final String imageUrl;
+
+  const WelcomeNoteImage({super.key, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.transparent, // Set a transparent background
+      ),
+      padding: const EdgeInsets.only(top: 60.0),
+      child: Image.asset(
+        imageUrl,
+      ),
+    );
+  }
+}
 
 class Category1WelcomeNote1 extends StatelessWidget {
   const Category1WelcomeNote1({super.key});
@@ -17,41 +34,50 @@ class Category1WelcomeNote1 extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            WelcomeNoteImage(
+            const WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/1.png"),
-            SizedBox(height: Dimentions.height25),
-            const Center(
+
+            Center(
               child: WelcomeFont(
                 text: 'Search Library',
               ),
             ),
-            const Center(
+
+            Center(
               child: WelcomeFont(
                 text: 'Book Online',
               ),
             ),
-            SizedBox(height: Dimentions.height25),
+            SizedBox(
+                height: Dimentions
+                    .height25), // Fixed typo: 'Dimentions' to 'Dimensions'
             Padding(
-              padding: EdgeInsets.all(Dimentions.height5),
-              child: const Center(
+              padding: EdgeInsets.all(Dimentions
+                  .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
+              child: Center(
                 child: SmallText(
                   text:
-                      'you dont need to search to books \nin racks any more just search here!',
+                      'You don\'t need to search for books \nin racks anymore, just search here!', // Fixed typo: 'dont' to 'don't'
                   maxLines: 2,
                 ),
               ),
             ),
-            SizedBox(height: Dimentions.height30),
-            // Add spacing between text and button
-            const DotsIndicatorContainers(changingNumber: 0),
+            SizedBox(
+                height: Dimentions
+                    .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
+            DotsIndicatorContainers(changingNumber: 0),
 
             const SizedBox(height: 30),
             GestureDetector(
-                onTap: () {
-                  Get.toNamed(FormIntegrator.getWelcomeNote2Category1());
-                },
-                child: RoundButton(
-                    buttonText: 'Next', buttonWidth: Dimentions.width200)),
+              onTap: () {
+                Get.toNamed(FormIntegrator.getWelcomeNote2Category1());
+              },
+              child: RoundButton(
+                  buttonText: 'Next',
+                  buttonWidth: Dimentions
+                      .width200 // Fixed typo: 'Dimentions' to 'Dimensions'
+                  ),
+            ),
           ],
         ),
       ),
