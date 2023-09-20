@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../utils/dimentions.dart';
 
+// ignore: must_be_immutable
 class WelcomeNoteImage extends StatelessWidget {
   final String imageUrl;
   final double containerWidth, containerHeight;
   bool isPaddingRequired;
 
   WelcomeNoteImage({
+    super.key,
     required this.imageUrl,
     this.containerHeight = 300,
     this.containerWidth = 300,

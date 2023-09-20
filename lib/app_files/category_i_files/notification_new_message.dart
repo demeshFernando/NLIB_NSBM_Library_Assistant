@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
@@ -9,6 +8,10 @@ import '../../utils/dimentions.dart';
 import '../../widgets/text_formatter.dart';
 
 class NotificationNewMessage extends StatefulWidget {
+  const NotificationNewMessage({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
   _NotificationMessageState createState() => _NotificationMessageState();
 }
 
@@ -40,9 +43,9 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 },
                 child: Icon(Icons.close, color: AppColors.ICON_WHITE)),
             SizedBox(width: Dimentions.width20),
-            Container(
+            SizedBox(
               width: Dimentions.width250,
-              child: TextHeader(text: 'New Message'),
+              child: const TextHeader(text: 'New Message'),
             ),
           ],
         ),
@@ -50,7 +53,7 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
       body: Column(
         children: [
           SizedBox(height: Dimentions.height40),
-          Container(
+          SizedBox(
             width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -58,13 +61,13 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 SizedBox(width: Dimentions.width10),
                 headingTiles(text: 'To:           '),
                 SizedBox(width: Dimentions.width10),
-                Container(
+                SizedBox(
                   width: Dimentions.width300,
                   child: TextField(
                     controller: toController,
                     focusNode: sendingPersonTextfield,
                     decoration:
-                        InputDecoration(hintText: 'index number / name'),
+                        const InputDecoration(hintText: 'index number / name'),
                   ),
                 )
               ],
@@ -77,7 +80,7 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
             color: AppColors.CONTAINER_GRAY,
           ),
           SizedBox(height: Dimentions.height10),
-          Container(
+          SizedBox(
             width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -85,12 +88,12 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 SizedBox(width: Dimentions.width10),
                 headingTiles(text: 'Heading: '),
                 SizedBox(width: Dimentions.width10),
-                Container(
+                SizedBox(
                   width: Dimentions.width300,
                   child: TextField(
                     controller: titleController,
-                    decoration:
-                        InputDecoration(hintText: 'Header of the message'),
+                    decoration: const InputDecoration(
+                        hintText: 'Header of the message'),
                   ),
                 ),
               ],

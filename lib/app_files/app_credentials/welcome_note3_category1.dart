@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart'; // Fixed typo: 'dimentions.dart' to 'dimensions.dart'
 
@@ -45,7 +46,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
                 text: 'Allocate a study',
               ),
             ),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'room online',
               ),
@@ -57,6 +58,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
               padding: EdgeInsets.all(Dimentions
                   .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
               child: Column(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SmallText(
@@ -74,7 +76,7 @@ class Category1WelcomeNote3 extends StatelessWidget {
                 height: Dimentions
                     .height30), // Fixed typo: 'Dimentions' to 'Dimensions'
             // Add spacing between text and button
-            DotsIndicatorContainers(changingNumber: 2),
+            const DotsIndicatorContainers(changingNumber: 2),
 
             SizedBox(
                 height: Dimentions

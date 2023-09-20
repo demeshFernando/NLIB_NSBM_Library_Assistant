@@ -41,7 +41,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
                 text: 'Save Your',
               ),
             ),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Favorite Book',
               ),
@@ -66,6 +66,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
                 ],
               ),
             ),
+
             SizedBox(
                 height: Dimentions
                     .height10), // Fixed typo: 'Dimentions' to 'Dimensions'

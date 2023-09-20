@@ -10,6 +10,8 @@ class BookCategoryResult extends StatefulWidget {
   final int pageId;
 
   const BookCategoryResult({super.key, required this.pageId});
+  @override
+  // ignore: library_private_types_in_public_api
   _BookCategoryResultState createState() => _BookCategoryResultState();
 }
 
@@ -32,7 +34,7 @@ class _BookCategoryResultState extends State<BookCategoryResult> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Category Name'),
+        title: const TextHeader(text: 'Category Name'),
       ),
       body: Column(
         children: [
@@ -41,7 +43,7 @@ class _BookCategoryResultState extends State<BookCategoryResult> {
             child: Column(
               children: [
                 ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: bookFavourites.length,
                     itemBuilder: (context, index) {
@@ -116,9 +118,9 @@ class _BookCategoryResultState extends State<BookCategoryResult> {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 width: Dimentions.width300,
-                child: SmallText(
+                child: const SmallText(
                   text:
                       'the book description will be displayed here if there one.',
                   maxLines: 2,

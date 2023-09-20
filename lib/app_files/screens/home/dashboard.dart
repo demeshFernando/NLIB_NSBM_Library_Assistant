@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books.dart';
+import 'package:nlib_library_assistant/app_files/screens/home/borrowed_books.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/drawer.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/favourite_page.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart';
@@ -13,6 +13,10 @@ import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
   _DashboardState createState() => _DashboardState();
 }
 
@@ -20,13 +24,14 @@ class _DashboardState extends State<Dashboard> {
   final searchBookcontroller = TextEditingController();
   int currentTab = 0;
   final List<Widget> screens = [
-    MainHomePage(),
-    StudyRoomSelection(),
+    const MainHomePage(),
+    const StudyRoomSelection(),
     FavouriteBooks(),
-    BorrowedBooks(),
+    const BorrowedBooks(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = MainHomePage();
+  Widget currentScreen = const MainHomePage();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SlidDrawer(),
@@ -34,94 +39,92 @@ class _DashboardState extends State<Dashboard> {
         automaticallyImplyLeading: false,
         toolbarHeight: Dimentions.height80,
         backgroundColor: Colors.white,
-        title: Container(
-          child: Column(children: [
-            SizedBox(height: Dimentions.height10),
-            Center(
-              child: Container(
-                height: Dimentions.height60,
-                width: Dimentions.width380,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimentions.radius30),
-                  color: AppColors.BASE_COLOR,
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: searchBookcontroller,
-                          decoration: InputDecoration(
-                              hintText: 'Search here',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              )),
-                        ),
+        title: Column(children: [
+          SizedBox(height: Dimentions.height10),
+          Center(
+            child: Container(
+              height: Dimentions.height60,
+              width: Dimentions.width380,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimentions.radius30),
+                color: AppColors.BASE_COLOR,
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: searchBookcontroller,
+                        decoration: InputDecoration(
+                            hintText: 'Search here',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            )),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            width: Dimentions.width50,
-                            height: Dimentions.height50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.BASE_COLOR,
-                            ),
-                            child: IconButton(
-                              icon: Icon(Icons.search),
-                              iconSize: Dimentions.icon24,
-                              onPressed: () {
-                                //if there is not text available
-                                if (searchBookcontroller.text == "") {
-                                  DialogBox errorDialog = DialogBox(
-                                      context: context,
-                                      title: "Error",
-                                      description:
-                                          "The search field is empty. Please enter a valid text to be searched",
-                                      onPressed: () {});
-                                  errorDialog.errorMessage();
-                                } else {
-                                  Get.toNamed(FormIntegrator.getSearchResults(
-                                      searchBookcontroller.text));
-                                }
-                              },
-                            ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: Dimentions.width50,
+                          height: Dimentions.height50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.BASE_COLOR,
                           ),
-                          SizedBox(width: Dimentions.width10),
-                          Builder(builder: (context) {
-                            return InkWell(
-                              onTap: () {
-                                Scaffold.of(context).openDrawer();
-                              },
-                              child: CircleAvatar(
-                                radius: Dimentions.radius25,
-                                backgroundColor: AppColors.CONTAINER_WHITE,
-                                child: ClipOval(
-                                  child: Image.asset(
-                                    "asset/profile/default.png",
-                                    fit: BoxFit.cover,
-                                  ),
+                          child: IconButton(
+                            icon: const Icon(Icons.search),
+                            iconSize: Dimentions.icon24,
+                            onPressed: () {
+                              //if there is not text available
+                              if (searchBookcontroller.text == "") {
+                                DialogBox errorDialog = DialogBox(
+                                    context: context,
+                                    title: "Error",
+                                    description:
+                                        "The search field is empty. Please enter a valid text to be searched",
+                                    onPressed: () {});
+                                errorDialog.errorMessage();
+                              } else {
+                                Get.toNamed(FormIntegrator.getSearchResults(
+                                    searchBookcontroller.text));
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(width: Dimentions.width10),
+                        Builder(builder: (context) {
+                          return InkWell(
+                            onTap: () {
+                              Scaffold.of(context).openDrawer();
+                            },
+                            child: CircleAvatar(
+                              radius: Dimentions.radius25,
+                              backgroundColor: AppColors.CONTAINER_WHITE,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  "asset/profile/default.png",
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            );
-                          }),
-                        ],
-                      ),
-                      SizedBox(
-                        width: Dimentions.width5,
-                      ),
-                    ],
-                  ),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+                    SizedBox(
+                      width: Dimentions.width5,
+                    ),
+                  ],
                 ),
               ),
             ),
-          ]),
-        ),
+          ),
+        ]),
       ),
       body: PageStorage(
-        child: currentScreen,
         bucket: bucket,
+        child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.BUTTON_COLOR,
@@ -135,9 +138,9 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 10,
-        child: Container(
+        child: SizedBox(
           height: Dimentions.height60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,7 +154,7 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: Dimentions.width40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = MainHomePage();
+                          currentScreen = const MainHomePage();
                           currentTab = 0;
                         });
                       },
@@ -177,7 +180,7 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: Dimentions.width40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = StudyRoomSelection();
+                          currentScreen = const StudyRoomSelection();
                           currentTab = 1;
                         });
                       },
@@ -203,7 +206,7 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: Dimentions.width40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = BorrowedBooks();
+                          currentScreen = const BorrowedBooks();
                           currentTab = 2;
                         });
                       },

@@ -1,8 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers
-
-//import 'dart:html';
-//import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
@@ -13,8 +9,9 @@ class WelcomeFont extends StatelessWidget {
   final double fontSize;
   final int maxLines;
 
-  WelcomeFont(
-      {this.fontSize = 35,
+  const WelcomeFont(
+      {super.key,
+      this.fontSize = 35,
       this.fontColor = const Color(0xff000000),
       required this.text,
       this.maxLines = 1});
@@ -42,7 +39,8 @@ class TextHeader extends StatelessWidget {
   final double fontSize;
   final int maxLines;
 
-  TextHeader({
+  const TextHeader({
+    super.key,
     this.fontSize = 24,
     this.fontColor = const Color(0xffFDFDF5),
     required this.text,
@@ -71,7 +69,8 @@ class SmallText extends StatelessWidget {
   final double fontSize;
   final int maxLines;
 
-  SmallText({
+  const SmallText({
+    super.key,
     required this.text,
     this.fontColor = const Color(0xff44483E),
     this.fontSize = 14,
@@ -100,11 +99,13 @@ class BoldText extends StatelessWidget {
   final int maxLines;
 
   const BoldText(
-      {required this.text,
+      {super.key,
+      required this.text,
       this.fontColor = const Color(0xff000000),
       this.fontSize = 12,
       this.maxLines = 1});
 
+  @override
   Widget build(BuildContext context) {
     return Text(
       text,

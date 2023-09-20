@@ -8,7 +8,8 @@ class RoundButton extends StatelessWidget {
   final Color buttonColor, fontColor, borderColor;
   final double buttonWidth, buttonHeight;
 
-  RoundButton({
+  const RoundButton({
+    super.key,
     required this.buttonText,
     this.buttonColor = const Color(0xff356B07),
     this.fontColor = const Color(0xffFFFFFF),

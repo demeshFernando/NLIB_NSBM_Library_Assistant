@@ -8,7 +8,9 @@ import '../../widgets/text_formatter.dart';
 
 class BorrowedBookDetails extends StatefulWidget {
   final int pageId;
-  BorrowedBookDetails({required this.pageId});
+  const BorrowedBookDetails({super.key, required this.pageId});
+  @override
+  // ignore: library_private_types_in_public_api
   _BorrowedBookDetailsState createState() => _BorrowedBookDetailsState();
 }
 
@@ -79,7 +81,7 @@ class _BorrowedBookDetailsState extends State<BorrowedBookDetails> {
               ),
             ),
             backgroundColor: AppColors.BASE_COLOR,
-            flexibleSpace: FlexibleSpaceBar(
+            flexibleSpace: const FlexibleSpaceBar(
                 // background: Image.asset('name', width: double.maxFinite, fit: BoxFit.cover,),
                 ),
           ),
@@ -97,7 +99,7 @@ class _BorrowedBookDetailsState extends State<BorrowedBookDetails> {
                         Center(
                           child: SizedBox(
                               width: Dimentions.width300,
-                              child: Center(
+                              child: const Center(
                                   child: SmallText(
                                 text: 'by Jk rowlings',
                                 maxLines: 3,
@@ -107,14 +109,14 @@ class _BorrowedBookDetailsState extends State<BorrowedBookDetails> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 SmallText(text: 'The book is taken on'),
                                 SmallText(text: 'on 2023/23/23'),
                               ],
                             ),
                             SizedBox(width: Dimentions.width40),
-                            Column(
+                            const Column(
                               children: [
                                 SmallText(text: 'The book has to be return,'),
                                 BoldText(text: 'on 2023/23/23'),

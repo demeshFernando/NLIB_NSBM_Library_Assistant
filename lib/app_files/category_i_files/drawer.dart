@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/app_files/services/auth.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
@@ -10,7 +11,10 @@ import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 import '../../widgets/rounded_button.dart';
 
 class SlidDrawer extends StatelessWidget {
-  const SlidDrawer({super.key});
+
+  final AuthService _auth = AuthService();
+
+  SlidDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class SlidDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: AppColors.BASE_COLOR),
-            accountName: TextHeader(text: 'W.D.Fernando'),
+            accountName: const TextHeader(text: 'W.D.Fernando'),
             accountEmail: TextHeader(
               text: 'wdfernando@students.nsbm.ac.lk',
               fontSize: Dimentions.font12,
@@ -37,19 +41,21 @@ class SlidDrawer extends StatelessWidget {
           buttonPanes(
               tileIndex: 0,
               text: 'User Profile',
-              icon: Icon(Icons.supervised_user_circle)),
+              icon: const Icon(Icons.supervised_user_circle)),
           buttonPanes(
               tileIndex: 1,
               text: 'Borrowed Books',
-              icon: Icon(Icons.library_books)),
+              icon: const Icon(Icons.library_books)),
           buttonPanes(
               tileIndex: 2,
               text: 'Notification',
-              icon: Icon(Icons.notifications)),
+              icon: const Icon(Icons.notifications)),
           buttonPanes(
-              tileIndex: 3, text: 'Favourite', icon: Icon(Icons.favorite)),
+              tileIndex: 3,
+              text: 'Favourite',
+              icon: const Icon(Icons.favorite)),
           buttonPanes(
-              tileIndex: 4, text: 'Settings', icon: Icon(Icons.settings)),
+              tileIndex: 4, text: 'Settings', icon: const Icon(Icons.settings)),
           SizedBox(height: Dimentions.height50),
           Padding(
             padding: EdgeInsets.all(Dimentions.height50),
@@ -65,9 +71,13 @@ class SlidDrawer extends StatelessWidget {
                     });
                 warningDialog.warningDialogBox();
               },
-              child: RoundButton(
-                buttonText: 'LogOut',
-              ),
+              child: ElevatedButton(
+                onPressed: () async{
+                  await _auth.signOut();
+                  Get.toNamed(FormIntegrator.signIn);
+                },
+                 child: Text("Sign Out"),
+                 ),
             ),
           ),
         ],

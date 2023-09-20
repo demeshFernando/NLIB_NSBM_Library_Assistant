@@ -24,7 +24,7 @@ class PasswordResetGuideliness extends StatelessWidget {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Reset Credentials'),
+        title: const TextHeader(text: 'Reset Credentials'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -65,7 +65,9 @@ class PasswordResetGuideliness extends StatelessWidget {
               width: double.maxFinite,
               child: Center(child: BoldText(text: 'Thank you!')),
             ),
-            SizedBox(
+
+            const SizedBox(
+
               width: double.maxFinite,
               child: Center(child: SmallText(text: 'Use the product wisely.')),
             )
@@ -86,6 +88,7 @@ class PasswordResetGuideliness extends StatelessWidget {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget UnderlineContainer() {
     return Row(
       children: [

@@ -5,8 +5,8 @@ import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
-import './drawer.dart';
 
+// ignore: must_be_immutable
 class FavouriteBooks extends StatefulWidget {
   var tagFavouriteButton = <bool>[
     true,
@@ -18,6 +18,10 @@ class FavouriteBooks extends StatefulWidget {
     false,
     false,
   ];
+
+  FavouriteBooks({super.key});
+  @override
+  // ignore: library_private_types_in_public_api
   _FavouriteBooksState createState() => _FavouriteBooksState();
 }
 
@@ -38,7 +42,7 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: TextHeader(text: 'Favourite Books'),
+        title: const TextHeader(text: 'Favourite Books'),
       ),
       body: SingleChildScrollView(
         child: Column(

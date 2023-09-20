@@ -6,7 +6,8 @@ class DotsIndicatorContainers extends StatelessWidget {
   final int changingNumber;
   final Color activeDotColor, normalDotColor;
 
-  DotsIndicatorContainers({
+  const DotsIndicatorContainers({
+    super.key,
     required this.changingNumber,
     this.activeDotColor = const Color(0xff8dc63f),
     this.normalDotColor = const Color(0xff868889),

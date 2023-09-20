@@ -36,6 +36,7 @@ class Category1WelcomeNote1 extends StatelessWidget {
           children: [
             const WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/1.png"),
+
             Center(
               child: WelcomeFont(
                 text: 'Search Library',

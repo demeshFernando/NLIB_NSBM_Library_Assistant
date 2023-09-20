@@ -12,12 +12,14 @@ class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MainHomePage createState() => _MainHomePage();
 }
 
 class _MainHomePage extends State<MainHomePage> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
+  // ignore: prefer_final_fields
   double _schaleFactor = 0.8, _height = Dimentions.height220;
 
   @override
@@ -37,6 +39,7 @@ class _MainHomePage extends State<MainHomePage> {
   //and after the needs are done we need to clear them as soon as possible
   @override
   void dispose() {
+    super.dispose();
     pageController.dispose();
   }
 
@@ -61,10 +64,10 @@ class _MainHomePage extends State<MainHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: Dimentions.height25),
-                    SmallText(
+                    const SmallText(
                       text: 'Welcome Back',
                     ),
-                    TextHeader(text: 'HI! Olivia'),
+                    const TextHeader(text: 'HI! Olivia'),
                   ],
                 ),
               ),
@@ -196,13 +199,11 @@ class _MainHomePage extends State<MainHomePage> {
                         text: mainHeader,
                         fontColor: AppColors.NORMAL_TEXT_COLOR,
                       ),
-                      SmallText(text: 'In Library'),
+                      const SmallText(text: 'In Library'),
                       SizedBox(height: Dimentions.height50),
-                      Container(
-                        child: SmallText(
-                          text: description,
-                          maxLines: 2,
-                        ),
+                      SmallText(
+                        text: description,
+                        maxLines: 2,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -235,9 +236,7 @@ class _MainHomePage extends State<MainHomePage> {
             bottom: bottom == 200 ? Dimentions.height200 : bottom,
             width: Dimentions.width300,
             height: Dimentions.height400,
-            child: Container(
-              child: Image.asset(imageUrl),
-            ))
+            child: Image.asset(imageUrl))
       ],
     );
   }
@@ -312,7 +311,7 @@ class _MainHomePage extends State<MainHomePage> {
                   TextHeader(
                       text: 'name of the author and the title is be here.',
                       fontColor: AppColors.NORMAL_TEXT_COLOR),
-                  SmallText(
+                  const SmallText(
                     text:
                         'description will be the description will be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the description',
                     maxLines: 5,
