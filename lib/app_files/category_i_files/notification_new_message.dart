@@ -61,13 +61,12 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 SizedBox(width: Dimentions.width10),
                 headingTiles(text: 'To:           '),
                 SizedBox(width: Dimentions.width10),
-                SizedBox(
-                  width: Dimentions.width300,
+                Expanded(
                   child: TextField(
                     controller: toController,
                     focusNode: sendingPersonTextfield,
                     decoration:
-                        const InputDecoration(hintText: 'index number / name'),
+                        const InputDecoration(hintText: 'Library Assistant'),
                   ),
                 )
               ],
@@ -88,8 +87,7 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 SizedBox(width: Dimentions.width10),
                 headingTiles(text: 'Heading: '),
                 SizedBox(width: Dimentions.width10),
-                SizedBox(
-                  width: Dimentions.width300,
+                Expanded(
                   child: TextField(
                     controller: titleController,
                     decoration: const InputDecoration(

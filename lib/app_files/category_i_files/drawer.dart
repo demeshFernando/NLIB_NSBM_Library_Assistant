@@ -8,10 +8,7 @@ import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
-import '../../widgets/rounded_button.dart';
-
 class SlidDrawer extends StatelessWidget {
-
   final AuthService _auth = AuthService();
 
   SlidDrawer({super.key});
@@ -24,9 +21,9 @@ class SlidDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: AppColors.BASE_COLOR),
-            accountName: const TextHeader(text: 'W.D.Fernando'),
+            accountName: const TextHeader(text: 'Olivia Austin'),
             accountEmail: TextHeader(
-              text: 'wdfernando@students.nsbm.ac.lk',
+              text: 'olivia@students.nsbm.ac.lk',
               fontSize: Dimentions.font12,
             ),
             currentAccountPicture: CircleAvatar(
@@ -72,12 +69,12 @@ class SlidDrawer extends StatelessWidget {
                 warningDialog.warningDialogBox();
               },
               child: ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   await _auth.signOut();
                   Get.toNamed(FormIntegrator.signIn);
                 },
-                 child: Text("Sign Out"),
-                 ),
+                child: const Text("Sign Out"),
+              ),
             ),
           ),
         ],
