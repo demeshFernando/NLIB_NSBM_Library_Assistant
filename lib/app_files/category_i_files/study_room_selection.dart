@@ -48,7 +48,8 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
                   shrinkWrap: true,
                   itemCount: 3,
                   itemBuilder: ((context, index) {
-                    return studyRoom(roomName: 'Study Room1', tileIndex: index);
+                    return studyRoom(
+                        roomName: 'Study Room 1', tileIndex: index);
                   }),
                 ),
               ],

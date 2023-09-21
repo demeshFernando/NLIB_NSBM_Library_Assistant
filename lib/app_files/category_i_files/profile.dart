@@ -49,7 +49,7 @@ class _Profile extends State<Profile> {
             children: [
               Container(
                 width: double.maxFinite,
-                height: Dimentions.height300,
+                height: Dimentions.heigght150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(Dimentions.radius20),
@@ -59,7 +59,7 @@ class _Profile extends State<Profile> {
                 ),
               ),
               Positioned(
-                top: Dimentions.height220,
+                top: Dimentions.heigght80,
                 child: CircleAvatar(
                   minRadius: Dimentions.radius80,
                   backgroundColor: AppColors.CONTAINER_WHITE,
@@ -76,12 +76,12 @@ class _Profile extends State<Profile> {
                 ),
               ),
               Positioned(
-                top: Dimentions.height280,
-                left: Dimentions.width220,
+                top: Dimentions.heigght180,
+                left: Dimentions.widdth220,
                 child: InkWell(
                   onTap: () {},
                   child: Container(
-                    padding: EdgeInsets.all(Dimentions.height20),
+                    padding: EdgeInsets.all(Dimentions.heigght20),
                     child: CircleAvatar(
                       backgroundColor: AppColors.BUTTON_COLOR,
                       radius: Dimentions.radius20,
@@ -94,16 +94,19 @@ class _Profile extends State<Profile> {
                 ),
               ),
               Positioned(
-                top: Dimentions.height390,
+                top: Dimentions.heigght240,
                 child: Column(
                   children: [
-                    TextHeader(
-                      text: 'Olivia Austin',
-                      fontColor: AppColors.NORMAL_TEXT_COLOR,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: TextHeader(
+                        text: 'Olivia Austin',
+                        fontColor: AppColors.NORMAL_TEXT_COLOR,
+                      ),
                     ),
-                    SizedBox(height: Dimentions.height10),
+                    SizedBox(height: Dimentions.heigght5),
                     SmallText(
-                      text: 'oliva@students.nsbm.ac.lk',
+                      text: 'olivia@students.nsbm.ac.lk',
                       fontColor: AppColors.FADED_TEXT_COLOR,
                     ),
                   ],
@@ -111,7 +114,7 @@ class _Profile extends State<Profile> {
               ),
             ],
           ),
-          SizedBox(height: Dimentions.height160),
+          SizedBox(height: Dimentions.heigght200),
           Column(
             children: [
               ExpansionTile(
@@ -128,36 +131,42 @@ class _Profile extends State<Profile> {
                         ),
                       ),
                       SizedBox(width: Dimentions.width10),
-                      Padding(
-                        padding: EdgeInsets.only(left: Dimentions.width2),
-                        child: BoldText(
-                          text: 'About Me',
-                          fontSize: titleFontSize,
-                        ),
+                      BoldText(
+                        text: 'About Me',
+                        fontSize: titleFontSize,
                       ),
                     ],
                   ),
                 ),
                 children: const [
                   Center(
-                    child: SmallText(text: 'This is title number 2'),
+                    child: Column(
+                      children: [
+                        SmallText(text: 'Name: Olivia Austin'),
+                        SmallText(text: 'Email: Olivia@students.nsbm.ac.lk'),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: Dimentions.height50),
-              buttonTiles(
-                  icon: Icons.favorite,
-                  titleText: 'My Favourite',
-                  buttonIndex: 0),
-              SizedBox(height: Dimentions.height30),
-              buttonTiles(
-                  icon: Icons.notifications_none,
-                  titleText: 'Notification',
-                  buttonIndex: 1,
-                  isCountNotificationShowable: true,
-                  notificationCount: '99'),
-              SizedBox(height: Dimentions.height30),
-              signOutTile(),
+              Column(
+                children: [
+                  SizedBox(height: Dimentions.heigght30),
+                  buttonTiles(
+                      icon: Icons.favorite,
+                      titleText: 'My Favourite',
+                      buttonIndex: 0),
+                  SizedBox(height: Dimentions.heigght30),
+                  buttonTiles(
+                      icon: Icons.notifications_none,
+                      titleText: 'Notification',
+                      buttonIndex: 1,
+                      isCountNotificationShowable: true,
+                      notificationCount: '99'),
+                  SizedBox(height: Dimentions.heigght30),
+                  signOutTile(),
+                ],
+              ),
             ],
           )
         ],
@@ -180,7 +189,8 @@ class _Profile extends State<Profile> {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: containerPadding),
+        padding: EdgeInsets.symmetric(
+            horizontal: containerPadding, vertical: Dimentions.heigght10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -209,7 +219,7 @@ class _Profile extends State<Profile> {
                     children: [
                       Container(
                         width: Dimentions.width30,
-                        height: Dimentions.height30,
+                        height: Dimentions.heigght30,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: AppColors.WARNING_TEXT_COLOR,
@@ -259,7 +269,8 @@ class _Profile extends State<Profile> {
         warningDialog.warningDialogBox();
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: containerPadding),
+        padding: EdgeInsets.symmetric(
+            horizontal: containerPadding, vertical: Dimentions.heigght10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -268,7 +279,7 @@ class _Profile extends State<Profile> {
                 Padding(
                   padding: EdgeInsets.only(left: rowLeftPadding),
                   child: Icon(
-                    Icons.arrow_back_ios_new,
+                    Icons.logout,
                     color: AppColors.BASE_COLOR,
                     size: iconSize,
                   ),

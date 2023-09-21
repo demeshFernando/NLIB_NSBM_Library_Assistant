@@ -267,20 +267,23 @@ class _SignInrState extends State<SignIn> {
 
                     Padding(
                       padding: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.05,
-                        bottom: MediaQuery.of(context).size.height * 0.7,
+                        left: Dimentions.widdth220,
+                        top: Dimentions.heigght120,
                       ),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Get.toNamed(
-                                FormIntegrator.getPasswordResetGuidelines());
-                          },
-                          child: BoldText(
-                            text: 'Credential Guidelines',
-                            fontColor: AppColors.BASE_COLOR,
-                          ),
+                      child: TextButton(
+                        onPressed: () {
+                          Get.toNamed(
+                              FormIntegrator.getPasswordResetGuidelines());
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            BoldText(
+                              text: 'Credential Guidelines',
+                              fontColor: AppColors.BASE_COLOR,
+                            ),
+                          ],
                         ),
                       ),
                     ),

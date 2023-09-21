@@ -17,7 +17,7 @@ class WelcomeNoteImage extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.transparent, // Setted a transparent background
       ),
-      padding: const EdgeInsets.only(top: 60.0),
+      padding: EdgeInsets.only(top: Dimentions.heigght60),
       child: Image.asset(
         imageUrl,
       ),
@@ -26,7 +26,15 @@ class WelcomeNoteImage extends StatelessWidget {
 }
 
 class Category1WelcomeNote1 extends StatelessWidget {
-  const Category1WelcomeNote1({super.key});
+  late double screenHight;
+  Category1WelcomeNote1({
+    super.key,
+  });
+
+  @override
+  void initState() {
+    screenHight = Get.context!.height;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +54,9 @@ class Category1WelcomeNote1 extends StatelessWidget {
                 text: 'Book Online',
               ),
             ),
-            SizedBox(height: Dimentions.height25),
+            SizedBox(height: Dimentions.heigght25),
             Padding(
-              padding: EdgeInsets.all(Dimentions.height5),
+              padding: EdgeInsets.all(Dimentions.heigght5),
               child: const Center(
                 child: SmallText(
                   text:
@@ -57,17 +65,15 @@ class Category1WelcomeNote1 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: Dimentions.height10),
+            SizedBox(height: Dimentions.heigght10),
             const DotsIndicatorContainers(changingNumber: 0),
             const SizedBox(height: 30),
             GestureDetector(
               onTap: () {
                 Get.toNamed(FormIntegrator.getWelcomeNote2Category1());
-                print(Get.context!.height);
-                print(Get.context!.width);
               },
               child: RoundButton(
-                  buttonText: 'Next', buttonWidth: Dimentions.width200),
+                  buttonText: 'Next', buttonWidth: Dimentions.widdth200),
             ),
           ],
         ),

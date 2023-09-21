@@ -64,12 +64,11 @@ class FormIntegrator {
   static const String welcomeNote2Category1 = "/welcome-note-2-category-1";
   static const String welcomeNote3Category1 = "/welcome-note-3-category-1";
   static const String passwordResetGuidelines = "/password-reset-guidelines";
-  
+
   static const String wrapper = "/wrapper";
 
-  
-  static String getInitial() => "$initial";
-  static String getHomePage() => "$homePage";
+  static String getInitial() => initial;
+  static String getHomePage() => homePage;
   static String getProfile(int pageId) => "$profile?pageId=$pageId";
   static String getNotification() => notification;
   static String getFavouriteBooks() => favouriteBooks;
@@ -104,7 +103,7 @@ class FormIntegrator {
   static String getWelcomeNote3Category1() => welcomeNote3Category1;
   static String getPasswordResetGuidelines() => passwordResetGuidelines;
 
-  static String getWrapper() => "$wrapper";
+  static String getWrapper() => wrapper;
 
   static List<GetPage> routes = [
     //main home page
@@ -118,11 +117,10 @@ class FormIntegrator {
 
     //wrapper
     GetPage(
-      name: wrapper,
-      page: () {
-        return Wrapper();
-      }
-    ),
+        name: wrapper,
+        page: () {
+          return const Wrapper();
+        }),
 
     //main home page
     GetPage(
@@ -245,7 +243,7 @@ class FormIntegrator {
     GetPage(
       name: welcomeNote1Category1,
       page: () {
-        return const Category1WelcomeNote1();
+        return Category1WelcomeNote1();
       },
       transition: Transition.fadeIn,
     ),

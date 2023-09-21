@@ -83,6 +83,8 @@ flutter:
     - asset/home_images/study_room/default.png
     - asset/books/default.png
     - asset/profile/default.png
+    - asset/profile/propic.jpg
+    
     - asset/books/book_category/default.png
     
     
