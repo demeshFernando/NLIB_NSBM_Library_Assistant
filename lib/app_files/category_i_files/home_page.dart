@@ -104,7 +104,7 @@ class _MainHomePage extends State<MainHomePage> {
               cardIndex: 0,
               mainHeader: 'Seat Count',
               description:
-                  'Check wetherh your seat ready and available before visiting inside the library',
+                  'Check whether your seat ready and available before visiting inside the library',
               buttonText: 'Refresh',
               imageUrl: "./asset/home_images/1.png",
               bottom: Dimentions.height100,

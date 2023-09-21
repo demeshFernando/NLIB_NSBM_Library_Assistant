@@ -19,8 +19,8 @@ class _SplashScreen extends State<SplashScreen> {
   }
 
   void _navigateToHome() async {
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      Get.offAllNamed(FormIntegrator.getSignIn());
+    Future.delayed(Duration(milliseconds: 1500), () {
+      Get.offAllNamed(FormIntegrator.getWrapper());
     });
   }
 

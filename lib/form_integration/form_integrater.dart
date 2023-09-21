@@ -9,9 +9,14 @@ import 'package:nlib_library_assistant/app_files/app_credentials/welcome_note3_c
 import 'package:nlib_library_assistant/app_files/category_i_files/book_categories.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/book_category_results.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_book_specific_details.dart';
+<<<<<<< HEAD
 import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/contact_list.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/dashboard.dart';
+=======
+import 'package:nlib_library_assistant/app_files/screens/home/borrowed_books.dart';
+import 'package:nlib_library_assistant/app_files/screens/home/dashboard.dart';
+>>>>>>> 582f237cac7c6ad9b25f4e39f7f9792e54cb46fb
 import 'package:nlib_library_assistant/app_files/category_i_files/dynamic_book.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/favourite_page.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/home_page.dart';
@@ -29,6 +34,7 @@ import 'package:nlib_library_assistant/app_files/category_i_files/notification.d
 import 'package:nlib_library_assistant/app_files/category_i_files/study_room_userselection.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/user_search_result.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/user_settings.dart';
+import 'package:nlib_library_assistant/app_files/screens/wrapper.dart';
 
 class FormIntegrator {
   static const String initial = "/";
@@ -66,9 +72,12 @@ class FormIntegrator {
   static const String welcomeNote2Category1 = "/welcome-note-2-category-1";
   static const String welcomeNote3Category1 = "/welcome-note-3-category-1";
   static const String passwordResetGuidelines = "/password-reset-guidelines";
+  
+  static const String wrapper = "/wrapper";
 
-  static String getInitial() => initial;
-  static String getHomePage() => homePage;
+  
+  static String getInitial() => "$initial";
+  static String getHomePage() => "$homePage";
   static String getProfile(int pageId) => "$profile?pageId=$pageId";
   static String getNotification() => notification;
   static String getFavouriteBooks() => favouriteBooks;
@@ -110,6 +119,8 @@ class FormIntegrator {
   static String getWelcomeNote3Category1() => welcomeNote3Category1;
   static String getPasswordResetGuidelines() => passwordResetGuidelines;
 
+  static String getWrapper() => "$wrapper";
+
   static List<GetPage> routes = [
     //main home page
     GetPage(
@@ -119,6 +130,15 @@ class FormIntegrator {
       },
       transition: Transition.fadeIn,
     ),
+
+    //wrapper
+    GetPage(
+      name: wrapper,
+      page: () {
+        return Wrapper();
+      }
+    ),
+
     //main home page
     GetPage(
       name: homePage,
