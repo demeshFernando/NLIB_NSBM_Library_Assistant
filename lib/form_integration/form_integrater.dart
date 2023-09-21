@@ -30,6 +30,8 @@ import 'package:nlib_library_assistant/app_files/category_i_files/user_search_re
 import 'package:nlib_library_assistant/app_files/category_i_files/user_settings.dart';
 import 'package:nlib_library_assistant/app_files/screens/wrapper.dart';
 
+import '../app_files/models/book.dart';
+
 class FormIntegrator {
   static const String initial = "/";
   static const String homePage = "/home-page";
@@ -79,7 +81,10 @@ class FormIntegrator {
   static String getNotificationMessage() => notificationMessage;
   static String getNewNotificationMessage() => newNotificationMessage;
 
-  static String getDynamicBook(int pageId) => "$dynamicBook?pageId=$pageId";
+  static String getDynamicBook(Book book) {
+  return "$dynamicBook?name=${book.name}&author=${book.author}&category=${book.category}&description=${book.description}&imageUrl=${book.imageUrl}";
+}
+
   static String getSearchResults(String bookName) =>
       "$searchResult?bookName=$bookName";
   static String getBookCategories() => bookCategories;
@@ -173,14 +178,23 @@ class FormIntegrator {
       transition: Transition.fadeIn,
     ),
     //dynamic book page
-    GetPage(
-      name: dynamicBook,
-      page: () {
-        var typeId = Get.parameters["pageId"];
-        return DynamicBook(pageId: int.parse(typeId!));
-      },
-      transition: Transition.fadeIn,
-    ),
+   GetPage(
+  name: dynamicBook,
+  page: () {
+    final Book book = Get.arguments as Book;
+    if (book != null) {
+      print('Received book: $book');
+      return DynamicBook(book: book);
+    } else {
+      // Handle the case when the book parameter is not valid.
+      // You can return an error page or redirect to another page.
+      return Category1WelcomeNote3(); // Replace with your error handling logic.
+    }
+  },
+  transition: Transition.fadeIn,
+),
+
+
     //search result page
     GetPage(
       name: searchResult,

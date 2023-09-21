@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/app_files/models/book.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
@@ -49,7 +50,13 @@ class _BookCategoryResultState extends State<BookCategoryResult> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(FormIntegrator.getDynamicBook(index));
+                          Book book = Book(
+                            name: "Head First Java",
+                            author: "Bert Bates and Kathy Sierra",
+                            category: "Computer Science",
+                            description: "Head First Java is a complete learning experience in Java and object-oriented programming. With this book, you'll learn the Java language with a unique method ...",
+                            imageUrl: "https://m.media-amazon.com/images/I/61M4nbiKAdL._AC_UF1000,1000_QL80_.jpg");
+                          Get.toNamed(FormIntegrator.getDynamicBook(book),arguments: book);
                         },
                         child: notificationPane(index),
                       );

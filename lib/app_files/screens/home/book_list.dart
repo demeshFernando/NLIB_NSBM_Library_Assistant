@@ -15,7 +15,7 @@ class _BookListState extends State<BookList> {
   @override
   Widget build(BuildContext context) {
 
-    //getting the books from the provider in dashboard.dart
+    //getting the books from the provider in borrowed_books.dart
     final books = Provider.of<List<Book>?> (context) ?? [];
 
     //returning the list of books

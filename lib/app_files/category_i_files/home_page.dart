@@ -287,7 +287,7 @@ class _MainHomePage extends State<MainHomePage> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(FormIntegrator.getDynamicBook(index));
+              // Get.toNamed(FormIntegrator.getDynamicBook(index));
             },
             child: Container(
               //color: Colors.redAccent,
