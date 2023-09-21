@@ -76,6 +76,11 @@ flutter:
     - asset/home_images/1.png
     - asset/home_images/2.png
     - asset/home_images/study_room/1.jpg
+    - asset/home_images/slider/hrp.png
+    - asset/home_images/slider/hobbit.png
+    - asset/home_images/slider/lotr.png
+    - asset/home_images/slider/narnia.png
+    - asset/home_images/slider/pj.png
     - asset/signin_images/NLIB.png
     - asset/signin_images/reset_guildelines/1.jpg
     - asset/signin_images/reset_guildelines/2.jpg
