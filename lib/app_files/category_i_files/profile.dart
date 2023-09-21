@@ -145,69 +145,47 @@ class _Profile extends State<Profile> {
                 ],
               ),
               SizedBox(height: Dimentions.height50),
-              buttonTiles(
-                icon: Icons.favorite,
-                titleText: 'My Favourite',
-                onPressed: () {
+              ListTile(
+                onTap: () {
                   Get.toNamed(FormIntegrator.getFavouriteBooks());
                 },
+                // leading: const Icon(Icons.favorite),
+                title: Row(
+                  children: [
+                    SizedBox(width: Dimentions.width50),
+                    const Icon(Icons.favorite),
+                    buttonTiles(
+                      titleText: 'My Favourite',
+                    ),
+                    Container(
+                      width: Dimentions.width30,
+                      height: Dimentions.height30,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: Dimentions.width40),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: iconSize,
+                        color: AppColors.GRAY_COLOR,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: Dimentions.height30),
-              buttonTiles(
-                  icon: Icons.notifications_none,
-                  titleText: 'Notification',
-                  onPressed: () {
+              ListTile(
+                  onTap: () {
                     Get.toNamed(FormIntegrator.getNotification());
                   },
-                  isCountNotificationShowable: true,
-                  notificationCount: '99'),
-              SizedBox(height: Dimentions.height30),
-              signOutTile(),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget buttonTiles(
-      {required IconData icon,
-      required String titleText,
-      required VoidCallback onPressed,
-      bool isCountNotificationShowable = false,
-      String notificationCount = "2"}) {
-    return InkWell(
-      onTap: () {
-        onPressed;
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: containerPadding),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: rowLeftPadding),
-                  child: Icon(
-                    icon,
-                    color: AppColors.BASE_COLOR,
-                    size: iconSize,
-                  ),
-                ),
-                SizedBox(width: Dimentions.width10),
-                Padding(
-                  padding: EdgeInsets.only(left: Dimentions.width2),
-                  child: BoldText(
-                    text: titleText,
-                    fontSize: titleFontSize,
-                  ),
-                ),
-              ],
-            ),
-            isCountNotificationShowable
-                ? Row(
+                  // leading: const Icon(Icons.notifications_none),
+                  title: Row(
                     children: [
+                      SizedBox(width: Dimentions.width50),
+                      const Icon(Icons.notifications_none),
+                      buttonTiles(titleText: 'Notification    '),
                       Container(
                         width: Dimentions.width30,
                         height: Dimentions.height30,
@@ -217,7 +195,7 @@ class _Profile extends State<Profile> {
                         ),
                         child: Center(
                           child: BoldText(
-                            text: notificationCount,
+                            text: '2',
                             fontColor: AppColors.HEADER_TEXT_COLOR,
                           ),
                         ),
@@ -231,60 +209,52 @@ class _Profile extends State<Profile> {
                         ),
                       ),
                     ],
-                  )
-                : Padding(
-                    padding: EdgeInsets.only(right: Dimentions.width40),
-                    child: Icon(
-                      Icons.arrow_forward_ios,
+                  )),
+              SizedBox(height: Dimentions.height30),
+              ListTile(
+                onTap: () {
+                  DialogBox warningDialog = DialogBox(
+                      context: context,
+                      title: 'Sign Out',
+                      description:
+                          "Are you sure to sign out? because sign out may delete all the proper data implications that are finished halfly.",
+                      onPressed: () {
+                        Get.toNamed(FormIntegrator.getSignIn());
+                      });
+                  warningDialog.warningDialogBox();
+                },
+                // leading: Icon(
+                //   Icons.arrow_back_ios_new,
+                //   color: AppColors.BASE_COLOR,
+                //   size: iconSize,
+                // ),
+                title: Row(
+                  children: [
+                    SizedBox(width: Dimentions.width50),
+                    Icon(
+                      Icons.arrow_back_ios_new,
+                      color: AppColors.BASE_COLOR,
                       size: iconSize,
-                      color: AppColors.GRAY_COLOR,
                     ),
-                  ),
-          ],
-        ),
+                    buttonTiles(titleText: 'Sign Out'),
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
 
-  Widget signOutTile() {
-    return InkWell(
-      onTap: () {
-        DialogBox warningDialog = DialogBox(
-            context: context,
-            title: 'Sign Out',
-            description:
-                "Are you sure to sign out? because sign out may delete all the proper data implications that are finished halfly.",
-            onPressed: () {
-              Get.toNamed(FormIntegrator.getSignIn());
-            });
-        warningDialog.warningDialogBox();
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: containerPadding),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: rowLeftPadding),
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: AppColors.BASE_COLOR,
-                    size: iconSize,
-                  ),
-                ),
-                SizedBox(width: Dimentions.width10),
-                Padding(
-                  padding: EdgeInsets.only(right: Dimentions.width40),
-                  child: BoldText(
-                    text: 'Sign out',
-                    fontSize: titleFontSize,
-                  ),
-                ),
-              ],
-            ),
-          ],
+  Widget buttonTiles({required String titleText}) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: containerPadding),
+      child: Padding(
+        padding: EdgeInsets.only(left: Dimentions.width2),
+        child: BoldText(
+          text: titleText,
+          fontSize: titleFontSize,
         ),
       ),
     );

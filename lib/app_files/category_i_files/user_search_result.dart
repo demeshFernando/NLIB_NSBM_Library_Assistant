@@ -6,8 +6,10 @@ import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/rounded_button.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class UserSearchResult extends StatefulWidget {
-  const UserSearchResult({super.key});
+  String searchText;
+  UserSearchResult({super.key, required this.searchText});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -30,7 +32,7 @@ class _UserSearchResultState extends State<UserSearchResult> {
             color: AppColors.ICON_WHITE,
           ),
         ),
-        title: const Expanded(child: TextHeader(text: 'User Result: 222')),
+        title: Expanded(child: TextHeader(text: widget.searchText)),
       ),
       body: SingleChildScrollView(
         child: Column(

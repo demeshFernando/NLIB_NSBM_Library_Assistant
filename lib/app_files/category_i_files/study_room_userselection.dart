@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -9,8 +7,14 @@ import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class StudyRoomUserSelection extends StatefulWidget {
-  const StudyRoomUserSelection({super.key});
+  int requestingHour, requestingMinute, roomId;
+  StudyRoomUserSelection(
+      {super.key,
+      required this.requestingHour,
+      required this.requestingMinute,
+      required this.roomId});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -18,6 +22,7 @@ class StudyRoomUserSelection extends StatefulWidget {
 }
 
 class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
+  final searchUserController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +97,8 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
               child: Row(
                 children: [
                   SmallText(
-                    text: '9:00 AM - 10:30 AM',
+                    text:
+                        '${widget.requestingHour} : ${widget.requestingMinute} | 5:00 PM',
                     fontColor: AppColors.NORMAL_TEXT_COLOR,
                   ),
                   SizedBox(width: Dimentions.width10),
@@ -126,16 +132,29 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
             margin: EdgeInsets.all(Dimentions.height10),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: searchUserController,
+                    decoration: const InputDecoration(
                         hintText: 'Search Students using index/name'),
                   ),
                 ),
                 SizedBox(width: Dimentions.width10),
                 IconButton(
                   onPressed: () {
-                    Get.toNamed(FormIntegrator.getUserSearchResult());
+                    //if there is no text to be proceed
+                    if (searchUserController.text == "") {
+                      warningTextMessage(
+                          context,
+                          "Error",
+                          "Please search the user with an index number or with any other method.",
+                          () {});
+                    }
+                    //else condition
+                    else {
+                      Get.toNamed(FormIntegrator.getUserSearchResult(
+                          searchUserController.text));
+                    }
                   },
                   icon: Icon(
                     Icons.search,
@@ -171,7 +190,13 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
               fontSize: Dimentions.font16,
             )),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                sucessMessage(
+                    context,
+                    "Reservation completed",
+                    "Hall you requested is sent for the hall request queue. You can look the status from the reserved hall form.",
+                    () {});
+              },
               child: BoldText(
                 text: 'Request the hall',
                 fontColor: AppColors.BUTTON_COLOR,
@@ -181,6 +206,26 @@ class _StudyRoomUserSelectionState extends State<StudyRoomUserSelection> {
         ),
       ),
     );
+  }
+
+  void sucessMessage(BuildContext context, String title, String description,
+      VoidCallback onPressed) {
+    DialogBox sucessMessage = DialogBox(
+        context: context,
+        title: title,
+        description: description,
+        onPressed: onPressed);
+    sucessMessage.succesfullMessage();
+  }
+
+  void warningTextMessage(BuildContext context, String title,
+      String description, VoidCallback onPressed) {
+    DialogBox warningMessage = DialogBox(
+        context: context,
+        title: title,
+        description: description,
+        onPressed: onPressed);
+    warningMessage.warningDialogBox();
   }
 
   Widget addedStudentTile() {

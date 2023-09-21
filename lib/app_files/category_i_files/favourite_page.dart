@@ -49,6 +49,7 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
           children: [
             ListView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: widget.tagFavouriteButton.length,
                 itemBuilder: ((context, index) {
                   return GestureDetector(

@@ -34,24 +34,41 @@ class SlidDrawer extends StatelessWidget {
               ),
             ),
           ),
-          buttonPanes(
-              tileIndex: 0,
-              text: 'User Profile',
-              icon: const Icon(Icons.supervised_user_circle)),
-          buttonPanes(
-              tileIndex: 1,
-              text: 'Borrowed Books',
-              icon: const Icon(Icons.library_books)),
-          buttonPanes(
-              tileIndex: 2,
-              text: 'Notification',
-              icon: const Icon(Icons.notifications)),
-          buttonPanes(
-              tileIndex: 3,
-              text: 'Favourite',
-              icon: const Icon(Icons.favorite)),
-          buttonPanes(
-              tileIndex: 4, text: 'Settings', icon: const Icon(Icons.settings)),
+          ListTile(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getProfile(1));
+            },
+            leading: const Icon(Icons.supervised_user_circle),
+            title: buttonPanes(text: 'User Profile'),
+          ),
+          ListTile(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getBookCategories());
+            },
+            leading: const Icon(Icons.library_books),
+            title: buttonPanes(text: 'Book categories'),
+          ),
+          ListTile(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getNotification());
+            },
+            leading: const Icon(Icons.notifications),
+            title: buttonPanes(text: 'Notification'),
+          ),
+          ListTile(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getFavouriteBooks());
+            },
+            leading: const Icon(Icons.favorite),
+            title: buttonPanes(text: 'Favourite'),
+          ),
+          ListTile(
+            onTap: () {
+              Get.toNamed(FormIntegrator.getUserSettings());
+            },
+            leading: const Icon(Icons.settings),
+            title: buttonPanes(text: 'Settings'),
+          ),
           SizedBox(height: Dimentions.height50),
           Padding(
             padding: EdgeInsets.all(Dimentions.height50),
@@ -79,38 +96,11 @@ class SlidDrawer extends StatelessWidget {
 
   Widget buttonPanes({
     required String text,
-    required Icon icon,
-    required int tileIndex,
   }) {
-    return ListTile(
-      leading: icon,
-      title: Text(text),
-      onTap: () {
-        //if button index = 0
-        if (tileIndex == 0) {
-          Get.toNamed(FormIntegrator.getProfile(1));
-        }
-
-        //if button index = 1
-        else if (tileIndex == 1) {
-          Get.toNamed(FormIntegrator.getBookCategories());
-        }
-
-        //if button index = 2
-        else if (tileIndex == 2) {
-          Get.toNamed(FormIntegrator.getNotification());
-        }
-
-        //if button index = 3
-        else if (tileIndex == 3) {
-          Get.toNamed(FormIntegrator.getFavouriteBooks());
-        }
-
-        //if button index = 4
-        else if (tileIndex == 4) {
-          Get.toNamed(FormIntegrator.getUserSettings());
-        }
-      },
+    return TextHeader(
+      text: text,
+      fontColor: AppColors.NORMAL_TEXT_COLOR,
+      fontSize: Dimentions.font20,
     );
   }
 }

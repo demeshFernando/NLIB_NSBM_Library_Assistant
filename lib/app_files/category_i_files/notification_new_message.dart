@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
 
 import '../../utils/app_colors.dart';
 import '../../utils/dimentions.dart';
 import '../../widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class NotificationNewMessage extends StatefulWidget {
-  const NotificationNewMessage({super.key});
+  int indexNumber;
+  NotificationNewMessage({super.key, this.indexNumber = 0});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -17,6 +20,7 @@ class NotificationNewMessage extends StatefulWidget {
 
 class _NotificationMessageState extends State<NotificationNewMessage> {
   FocusNode sendingPersonTextfield = FocusNode();
+  FocusNode headerFocusNode = FocusNode();
   FocusNode messageBody = FocusNode();
   final toController = TextEditingController();
   final titleController = TextEditingController();
@@ -25,7 +29,14 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
   @override
   void initState() {
     super.initState();
-    sendingPersonTextfield.requestFocus();
+    toController.text = widget.indexNumber.toString();
+    if (toController.text == "") {
+      sendingPersonTextfield.requestFocus();
+    } else if (toController.text == "0") {
+      sendingPersonTextfield.requestFocus();
+    } else {
+      headerFocusNode.requestFocus();
+    }
   }
 
   @override
@@ -39,7 +50,15 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
             SizedBox(width: Dimentions.width10),
             GestureDetector(
                 onTap: () {
-                  Get.back();
+                  //giving a warning message if the textfield is not empty
+                  if (toController.text != "") {
+                    sendWarningMessage(
+                        "Are you sure",
+                        "All the contents that you fileed up will be erased. if you sure click OK to cancel the sending of the message.",
+                        context, () {
+                      Get.back();
+                    });
+                  }
                 },
                 child: Icon(Icons.close, color: AppColors.ICON_WHITE)),
             SizedBox(width: Dimentions.width20),
@@ -49,6 +68,13 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
             ),
           ],
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed(FormIntegrator.getContactList());
+              },
+              icon: Icon(Icons.contact_page, color: AppColors.ICON_WHITE))
+        ],
       ),
       body: Column(
         children: [
@@ -91,6 +117,7 @@ class _NotificationMessageState extends State<NotificationNewMessage> {
                 SizedBox(
                   width: Dimentions.width300,
                   child: TextField(
+                    focusNode: headerFocusNode,
                     controller: titleController,
                     decoration: const InputDecoration(
                         hintText: 'Header of the message'),

@@ -51,7 +51,7 @@ class _ResrvedStudyRoomState extends State<ResrvedStudyRooms> {
   Widget listContainer(int pageId) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(FormIntegrator.getReservedStudyRoomSelectionDetails());
+        Get.toNamed(FormIntegrator.getReservedStudyRoomSelectionDetails(12));
       },
       child: Container(
         width: double.infinity,

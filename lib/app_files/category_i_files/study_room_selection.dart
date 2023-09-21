@@ -86,7 +86,7 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
         children: [
           GestureDetector(
               onTap: () {
-                Get.toNamed(FormIntegrator.getStudyRoomResults(tileIndex));
+                Get.toNamed(FormIntegrator.getStudyRoomResults(0));
               },
               child: WelcomeNoteImage(
                   imageUrl: "asset/home_images/study_room/default.png",
@@ -111,7 +111,7 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.toNamed(FormIntegrator.getStudyRoomResults(tileIndex));
+                  Get.toNamed(FormIntegrator.getStudyRoomResults(0));
                 },
                 child: BoldText(
                   text: 'Reserve',

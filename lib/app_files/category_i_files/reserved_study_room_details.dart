@@ -7,8 +7,10 @@ import 'package:nlib_library_assistant/utils/dialog_box.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+// ignore: must_be_immutable
 class ReservedStudyRoomDetails extends StatefulWidget {
-  const ReservedStudyRoomDetails({super.key});
+  int roomId;
+  ReservedStudyRoomDetails({super.key, required this.roomId});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -17,6 +19,7 @@ class ReservedStudyRoomDetails extends StatefulWidget {
 }
 
 class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
+  final searchUserController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +53,26 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
           Container(
             width: double.maxFinite,
             margin: EdgeInsets.all(Dimentions.height10),
-            child: TextHeader(
-              text: 'Study room 01',
-              fontColor: AppColors.NORMAL_TEXT_COLOR,
-              fontSize: Dimentions.font20,
-              maxLines: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextHeader(
+                  text: 'Study room 01',
+                  fontColor: AppColors.NORMAL_TEXT_COLOR,
+                  fontSize: Dimentions.font20,
+                  maxLines: 2,
+                ),
+                TextButton(
+                    onPressed: () {
+                      sucessMessage(
+                          context,
+                          "Completed!",
+                          "Hall request updated with the current information",
+                          () {});
+                    },
+                    child: BoldText(
+                        text: 'Update', fontColor: AppColors.BUTTON_COLOR))
+              ],
             ),
           ),
           Container(
@@ -87,16 +105,29 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
             margin: EdgeInsets.all(Dimentions.height10),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: searchUserController,
+                    decoration: const InputDecoration(
                         hintText: 'Search Students using index/name'),
                   ),
                 ),
                 SizedBox(width: Dimentions.width10),
                 IconButton(
                   onPressed: () {
-                    Get.toNamed(FormIntegrator.getUserSearchResult());
+                    //if there is no text to be proceed
+                    if (searchUserController.text == "") {
+                      warningTextMessage(
+                          context,
+                          "Error",
+                          "Please search the user with an index number or with any other method.",
+                          () {});
+                    }
+                    //else condition
+                    else {
+                      Get.toNamed(FormIntegrator.getUserSearchResult(
+                          searchUserController.text));
+                    }
                   },
                   icon: Icon(
                     Icons.search,
@@ -136,9 +167,11 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
                 DialogBox reConfirmation = DialogBox(
                     context: context,
                     title: "Are you sure?",
-                    description: "Will you expect to change the hall?",
+                    description:
+                        "Will you expect to change the hall? because the chaning the hall means reconfiguring all the details again?",
                     onPressed: () {
-                      Get.toNamed(FormIntegrator.getStudyRoomUserSelection());
+                      Get.toNamed(FormIntegrator.getStudyRoomUserSelection(
+                          9, 55, widget.roomId));
                     });
                 reConfirmation.cautionMessage();
               },
@@ -148,7 +181,13 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                //confirming the cacelation
+                warningTextMessage(context, "Confirm",
+                    "Are you sure to cancel the hall request?", () {
+                  Get.back();
+                });
+              },
               child: BoldText(
                 text: 'Cancel Request',
                 fontColor: AppColors.WARNING_TEXT_COLOR,
@@ -158,6 +197,26 @@ class _ReservedStudyRoomDetailsState extends State<ReservedStudyRoomDetails> {
         ),
       ),
     );
+  }
+
+  void sucessMessage(BuildContext context, String title, String description,
+      VoidCallback onPressed) {
+    DialogBox sucessMessage = DialogBox(
+        context: context,
+        title: title,
+        description: description,
+        onPressed: onPressed);
+    sucessMessage.succesfullMessage();
+  }
+
+  void warningTextMessage(BuildContext context, String title,
+      String description, VoidCallback onPressed) {
+    DialogBox warningMessage = DialogBox(
+        context: context,
+        title: title,
+        description: description,
+        onPressed: onPressed);
+    warningMessage.warningDialogBox();
   }
 
   Widget addedStudentTile() {

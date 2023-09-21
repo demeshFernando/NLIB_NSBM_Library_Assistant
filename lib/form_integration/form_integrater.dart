@@ -10,6 +10,7 @@ import 'package:nlib_library_assistant/app_files/category_i_files/book_categorie
 import 'package:nlib_library_assistant/app_files/category_i_files/book_category_results.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_book_specific_details.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/borrowed_books.dart';
+import 'package:nlib_library_assistant/app_files/category_i_files/contact_list.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/dashboard.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/dynamic_book.dart';
 import 'package:nlib_library_assistant/app_files/category_i_files/favourite_page.dart';
@@ -37,6 +38,8 @@ class FormIntegrator {
   static const String favouriteBooks = "/favourite-books";
   static const String userSettings = "/user-settings";
   static const String dashboard = "/dashboard";
+
+  static const String contactList = "/contact-list";
 
   static const String notificationMessage = "/notification-message";
   static const String newNotificationMessage = "/new-notification-message";
@@ -73,8 +76,11 @@ class FormIntegrator {
   static String getDashboard(int currentTab) =>
       "$dashboard?currentTab=$currentTab";
 
+  static String getContactList() => contactList;
+
   static String getNotificationMessage() => notificationMessage;
-  static String getNewNotificationMessage() => newNotificationMessage;
+  static String getNewNotificationMessage({int indexNumber = 0}) =>
+      "$newNotificationMessage?indexNumber=$indexNumber";
 
   static String getDynamicBook(int pageId) => "$dynamicBook?pageId=$pageId";
   static String getSearchResults(String bookName) =>
@@ -87,13 +93,16 @@ class FormIntegrator {
       "$borrowedBookSpecificDetails?pageId=$pageId";
 
   static String getResrvedStudyRoomSelection() => reservedStudyRoomSelection;
-  static String getReservedStudyRoomSelectionDetails() =>
-      reservedStudyRoomSelectionDetails;
+  static String getReservedStudyRoomSelectionDetails(int roomId) =>
+      "$reservedStudyRoomSelectionDetails?roomId=$roomId";
   static String getStudyRoomSelection() => studyRoomSelection;
-  static String getStudyRoomResults(int pageId) =>
-      "$studyRoomResults?pageId=$pageId";
-  static String getStudyRoomUserSelection() => studyRoomUserSelection;
-  static String getUserSearchResult() => userSearchResult;
+  static String getStudyRoomResults(int roomId) =>
+      "$studyRoomResults?roomId=$roomId";
+  static String getStudyRoomUserSelection(
+          int requestingHour, int requestingMinute, int roomId) =>
+      "$studyRoomUserSelection?requestingHour=$requestingHour&requestingMinute=$requestingMinute&roomId=$roomId";
+  static String getUserSearchResult(String text) =>
+      "$userSearchResult?text=$text";
 
   static String getSignIn() => signIn;
   static String getWelcomeNote1Category1() => welcomeNote1Category1;
@@ -159,6 +168,13 @@ class FormIntegrator {
       },
       transition: Transition.fadeIn,
     ),
+    GetPage(
+      name: contactList,
+      page: () {
+        return const ContactList();
+      },
+      transition: Transition.fadeIn,
+    ),
     //dynamic book page
     GetPage(
       name: dynamicBook,
@@ -187,7 +203,10 @@ class FormIntegrator {
     GetPage(
       name: reservedStudyRoomSelectionDetails,
       page: () {
-        return const ReservedStudyRoomDetails();
+        var typeId = Get.parameters["roomId"];
+        return ReservedStudyRoomDetails(
+          roomId: int.parse(typeId!),
+        );
       },
       transition: Transition.fadeIn,
     ),
@@ -202,22 +221,31 @@ class FormIntegrator {
     GetPage(
       name: studyRoomResults,
       page: () {
-        var typeId = Get.parameters["pageId"];
-        return StudyRoomResults(pageId: int.parse(typeId!));
+        var typeId = Get.parameters["roomId"];
+        return StudyRoomResults(roomId: int.parse(typeId!));
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: studyRoomUserSelection,
       page: () {
-        return const StudyRoomUserSelection();
+        var hour = Get.parameters["requestingHour"],
+            minute = Get.parameters["requestingMinute"],
+            // ignore: non_constant_identifier_names
+            Id = Get.parameters["roomId"];
+        return StudyRoomUserSelection(
+          requestingHour: int.parse(hour!),
+          requestingMinute: int.parse(minute!),
+          roomId: int.parse(Id!),
+        );
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: userSearchResult,
       page: () {
-        return const UserSearchResult();
+        var searchText = Get.parameters["text"];
+        return UserSearchResult(searchText: searchText!);
       },
       transition: Transition.fadeIn,
     ),
@@ -301,9 +329,12 @@ class FormIntegrator {
       transition: Transition.fadeIn,
     ),
     GetPage(
-        name: newNotificationMessage,
-        page: () {
-          return const NotificationNewMessage();
-        })
+      name: newNotificationMessage,
+      page: () {
+        var userId = Get.parameters["indexNumber"];
+        return NotificationNewMessage(indexNumber: int.parse(userId!));
+      },
+      transition: Transition.fadeIn,
+    )
   ];
 }

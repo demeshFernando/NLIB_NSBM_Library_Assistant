@@ -14,8 +14,8 @@ import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 import '../../utils/dimentions.dart';
 
 class StudyRoomResults extends StatefulWidget {
-  final int pageId;
-  const StudyRoomResults({super.key, required this.pageId});
+  final int roomId;
+  const StudyRoomResults({super.key, required this.roomId});
 
   @override
   State<StudyRoomResults> createState() => _studyRoomResultsState();
@@ -301,11 +301,58 @@ class _studyRoomResultsState extends State<StudyRoomResults> {
                                                       .requestFocus();
                                                 });
                                               }
+                                              //if the time level is between 4 to 5
+                                              else if (int.parse(_hourcontroller
+                                                          .text) <
+                                                      5 &&
+                                                  int.parse(_hourcontroller
+                                                          .text) >=
+                                                      4) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Timeout",
+                                                    "Time is too closed to close the premises. Please try again tomorrow",
+                                                    () {});
+                                              }
+
+                                              // if the timeline is too early
+                                              else if (_selections[0] == true &&
+                                                  (int.parse(_hourcontroller
+                                                              .text) >=
+                                                          0 &&
+                                                      int.parse(_hourcontroller
+                                                              .text) <
+                                                          9)) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Too early",
+                                                    "The premises is still not open. please try again at 9:00 AM",
+                                                    () {});
+                                              }
+
+                                              //if the booking happens when the NSBM is closed
+                                              else if (int.parse(_hourcontroller
+                                                          .text) >=
+                                                      5 &&
+                                                  _selections[1] == true) {
+                                                warningTextMessage(
+                                                    context,
+                                                    "Closed",
+                                                    "NSBM is closed please try again tommorow",
+                                                    () {});
+                                              }
 
                                               //if both are ok
                                               else {
                                                 Get.toNamed(FormIntegrator
-                                                    .getStudyRoomUserSelection());
+                                                    .getStudyRoomUserSelection(
+                                                        int.parse(
+                                                            _hourcontroller
+                                                                .text),
+                                                        int.parse(
+                                                            _minutecontroller
+                                                                .text),
+                                                        widget.roomId));
                                               }
                                             },
                                             child: SmallText(
