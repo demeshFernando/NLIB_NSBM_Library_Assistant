@@ -7,6 +7,7 @@ import '../../utils/dimentions.dart';
 import '../../widgets/rounded_button.dart';
 import '../../utils/app_colors.dart';
 import '../../widgets/text_formatter.dart';
+import '../models/book.dart';
 
 class BookData {
   final String title;
@@ -336,7 +337,14 @@ class _MainHomePage extends State<MainHomePage> {
       children: [
         GestureDetector(
           onTap: () {
-            Get.toNamed(FormIntegrator.getDynamicBook(index));
+
+            Book book = Book(
+                            name: "Head First Java",
+                            author: "Bert Bates and Kathy Sierra",
+                            category: "Computer Science",
+                            description: "Head First Java is a complete learning experience in Java and object-oriented programming. With this book, you'll learn the Java language with a unique method ...",
+                            imageUrl: "https://m.media-amazon.com/images/I/61M4nbiKAdL._AC_UF1000,1000_QL80_.jpg");
+                          Get.toNamed(FormIntegrator.getDynamicBook(book),arguments: book);
           },
           child: Container(
             width: Dimentions.width350,
