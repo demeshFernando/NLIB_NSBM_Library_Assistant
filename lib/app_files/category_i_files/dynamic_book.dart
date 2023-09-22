@@ -70,10 +70,13 @@ class _DynamicBookState extends State<DynamicBook> {
                 child: Center(
                   child: SizedBox(
                     width: Dimentions.width300,
-                    child: TextHeader(
-                      text: widget.book.name,
-                      fontColor: AppColors.NORMAL_TEXT_COLOR,
-                      maxLines: 10,
+                    child: Center(
+                      child: TextHeader(
+                        text: widget.book.name,
+                        fontSize: 30,
+                        fontColor: AppColors.NORMAL_TEXT_COLOR,
+                        maxLines: 10,
+                      ),
                     ),
                   ),
                 ),
@@ -102,7 +105,12 @@ class _DynamicBookState extends State<DynamicBook> {
                           child: SizedBox(
                               width: Dimentions.width300,
                               child: Center(
-                                child: Text(widget.book.name),
+                              child: TextHeader(
+                              text: widget.book.name,
+                              fontSize: 18,
+                              fontColor: AppColors.NORMAL_TEXT_COLOR,
+                              maxLines: 10,
+                                ),
                               )),
                         ),
                         SizedBox(height: Dimentions.height50),
@@ -137,23 +145,27 @@ class _DynamicBookState extends State<DynamicBook> {
                             children: [
                               Icon(
                                 Icons.bookmark,
-                                color: AppColors.GRAY_COLOR,
+                                color: AppColors.BUTTON_COLOR,
                               ),
                               SizedBox(width: Dimentions.width10),
                               SmallText(
                                 text: 'the book will available on',
-                                fontColor: AppColors.FADED_TEXT_COLOR,
+                                fontColor: AppColors.BASE_COLOR,
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
+                       Container(
+                        margin: EdgeInsets.all(15.0), // Adjust the margin as needed
+                        child: SizedBox(
                           width: double.maxFinite,
                           child: SmallText(
                             text: widget.book.description,
                             maxLines: 100,
+                            fontSize: 15,
                           ),
-                        )
+                        ),
+                      )
                       ],
                     ),
                   ),
