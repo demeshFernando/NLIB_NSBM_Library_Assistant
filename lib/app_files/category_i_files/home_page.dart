@@ -8,6 +8,19 @@ import '../../widgets/rounded_button.dart';
 import '../../utils/app_colors.dart';
 import '../../widgets/text_formatter.dart';
 
+class BookData {
+  final String title;
+  final String imageUrl;
+  final String authorName;
+
+  BookData({
+    required this.title,
+    required this.imageUrl,
+    required this.authorName,
+  });
+}
+
+
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
 
@@ -17,6 +30,35 @@ class MainHomePage extends StatefulWidget {
 }
 
 class _MainHomePage extends State<MainHomePage> {
+  
+   List<BookData> books = [
+    BookData(
+      title: 'Harry Potter Series',
+      imageUrl: 'asset/home_images/slider/hrp.png', 
+      authorName: 'J.K. Rowling',
+    ),
+    BookData(
+      title: 'The Percy Jackson',
+      imageUrl: 'asset/home_images/slider/pj.png', 
+      authorName: 'Rick Riordan',
+    ),
+    BookData(
+      title: 'The Chronicles of Narnia',
+      imageUrl: 'asset/home_images/slider/narnia.png', 
+      authorName: 'C.S. Lewis',
+    ),
+    BookData(
+      title: 'The Hobbit',
+      imageUrl: 'asset/home_images/slider/hobbit.png', 
+      authorName: 'J.R.R. Tolkien',
+    ),
+    BookData(
+      title: 'The Lord of the Rings',
+      imageUrl: 'asset/home_images/slider/lotr.png', 
+      authorName: 'J.R.R. Tolkien',
+    ),
+  ];
+
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
   // ignore: prefer_final_fields
@@ -82,7 +124,7 @@ class _MainHomePage extends State<MainHomePage> {
                   controller: pageController,
                   itemCount: 5,
                   itemBuilder: (context, position) {
-                    return _buildPageItem(position);
+                    return _buildPageItem(position,books);
                   }),
             ),
 
@@ -241,7 +283,14 @@ class _MainHomePage extends State<MainHomePage> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, List<BookData> books) {
+
+    if (index < 0 || index >= books.length) {
+    return Container(); // Return an empty container if index is out of bounds
+  }
+
+  final book = books[index];
+
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentPageValue.floor()) {
       //using this simple math we are trying to get what is active and what is not
@@ -283,45 +332,72 @@ class _MainHomePage extends State<MainHomePage> {
 
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          GestureDetector(
-            onTap: () {
-              // Get.toNamed(FormIntegrator.getDynamicBook(index));
-            },
-            child: Container(
-              //color: Colors.redAccent,
-              width: Dimentions.width350,
-              height: _height,
-              padding: EdgeInsets.all(Dimentions.radius10),
-              margin: EdgeInsets.only(
-                  left: Dimentions.width10, right: Dimentions.width10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimentions.radius30),
-                border: Border.all(color: AppColors.CONTAINER_BLACK),
-                color: index.isEven
-                    ? AppColors.CONTAINER_WHITE
-                    : AppColors.CONTAINER_COLOR,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const BoldText(text: 'name of the author'),
-                  TextHeader(
-                      text: 'name of the author and the title is be here.',
-                      fontColor: AppColors.NORMAL_TEXT_COLOR),
-                  const SmallText(
-                    text:
-                        'description will be the description will be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the descriptionwill be the description',
-                    maxLines: 5,
-                  )
-                ],
-              ),
+    child: Stack(
+      children: [
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(FormIntegrator.getDynamicBook(index));
+          },
+          child: Container(
+            width: Dimentions.width350,
+            height: _height,
+            margin: EdgeInsets.only(
+                left: Dimentions.width10, right: Dimentions.width10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimentions.radius30),
+              border: Border.all(color: AppColors.CONTAINER_BLACK),
+              color:  AppColors.CONTAINER_WHITE,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5), // Shadow color
+                  spreadRadius: 2, // Spread radius
+                  blurRadius: 4, // Blur radius
+                  offset: Offset(0, 2), // Offset in the x and y direction
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  // Image container to take up half or three-quarters of the card
+                  height: _height * 0.55, // Adjust the height as needed
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(Dimentions.radius30),
+                      topRight: Radius.circular(Dimentions.radius30),
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(book.imageUrl),
+                      fit: BoxFit.cover, // This will make the image cover the container
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(Dimentions.radius10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      BoldText(text: 'New Arrivel'),
+                      TextHeader(
+                        text: book.title,
+                        fontColor: AppColors.NORMAL_TEXT_COLOR,
+                      ),
+                      SmallText(
+                        text:book.authorName,
+                        maxLines: 5,
+                      ),
+                     
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ),
+  );
   }
 }

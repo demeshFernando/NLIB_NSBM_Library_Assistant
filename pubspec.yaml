@@ -76,6 +76,11 @@ flutter:
     - asset/home_images/1.png
     - asset/home_images/2.png
     - asset/home_images/study_room/1.jpg
+    - asset/home_images/slider/hrp.png
+    - asset/home_images/slider/hobbit.png
+    - asset/home_images/slider/lotr.png
+    - asset/home_images/slider/narnia.png
+    - asset/home_images/slider/pj.png
     - asset/signin_images/NLIB.png
     - asset/signin_images/reset_guildelines/1.jpg
     - asset/signin_images/reset_guildelines/2.jpg
@@ -83,7 +88,21 @@ flutter:
     - asset/home_images/study_room/default.png
     - asset/books/default.png
     - asset/profile/default.png
-    - asset/books/book_category/default.png
+    - asset/books/book_category/travel.jpg
+    - asset/books/book_category/biology.jpg
+    - asset/books/book_category/business.jpg
+    - asset/books/book_category/computerscience.jpg
+    - asset/books/book_category/engineering.jpg
+    - asset/books/book_category/finance.jpg
+    - asset/books/book_category/law.jpg
+    - asset/books/book_category/photography.jpg
+    - asset/books/book_category/religion.jpg
+    - asset/books/book_category/selfhelp.jpg
+    - asset/books/book_category/philosophy.jpg
+    - asset/books/book_category/astronomy.jpg
+    
+    
+    
     
     
 
