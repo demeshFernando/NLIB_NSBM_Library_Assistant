@@ -29,7 +29,7 @@ class SlidDrawer extends StatelessWidget {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(
-                  "asset/profile/default.png",
+                  "asset/profile/profile.png",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -41,7 +41,7 @@ class SlidDrawer extends StatelessWidget {
               icon: const Icon(Icons.supervised_user_circle)),
           buttonPanes(
               tileIndex: 1,
-              text: 'Borrowed Books',
+              text: 'Book Categories',
               icon: const Icon(Icons.library_books)),
           buttonPanes(
               tileIndex: 2,

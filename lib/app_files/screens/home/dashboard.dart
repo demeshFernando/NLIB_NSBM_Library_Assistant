@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
                                 backgroundColor: AppColors.CONTAINER_WHITE,
                               child: ClipOval(
                                 child: Image.asset(
-                                  "asset/profile/default.png",
+                                  "asset/profile/profile.png",
                                   fit: BoxFit.cover,
                                 ),
                               ),

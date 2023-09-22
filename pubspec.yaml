@@ -87,8 +87,7 @@ flutter:
     - asset/signin_images/reset_guildelines/3.jpg
     - asset/home_images/study_room/default.png
     - asset/books/default.png
-    - asset/profile/default.png
-    - asset/profile/propic.jpg
+    - asset/profile/profile.png
     
     - asset/books/book_category/default.png
     - asset/books/book_category/travel.jpg
