@@ -32,6 +32,26 @@ class Dimentions {
   static double height400 = screenHeight / 2.11;
   static double height650 = screenHeight / 1.3;
 
+//Screen width = 411.42
+//Screen height = 866.28
+  static double heigght5 = screenHeight / 173.25;
+  static double heigght10 = screenHeight / 86.62;
+  static double heigght20 = screenHeight / 43.31;
+  static double heigght25 = screenHeight / 34.65;
+  static double heigght30 = screenHeight / 28.87;
+  static double heigght50 = screenHeight / 17.32;
+  static double heigght60 = screenHeight / 14.43;
+  static double heigght80 = screenHeight / 10.82;
+  static double heigght90 = screenHeight / 9.62;
+  static double heigght100 = screenHeight / 8.66;
+  static double heigght120 = screenHeight / 7.21;
+  static double heigght150 = screenHeight / 5.77;
+  static double heigght180 = screenHeight / 4.81;
+  static double heigght200 = screenHeight / 4.33;
+  static double heigght230 = screenHeight / 3.76;
+  static double heigght240 = screenHeight / 3.60;
+  static double heigght250 = screenHeight / 3.46;
+
   static double width2 = screenHeight / 195;
   static double width3 = screenHeight / 281.33;
   static double width5 = screenWidth / 78;
@@ -55,6 +75,12 @@ class Dimentions {
   static double width300 = screenWidth / 1.3;
   static double width350 = screenWidth / 1.11;
   static double width380 = screenWidth / 1.03;
+
+  //Screen width = 411.42
+//Screen height = 866.28
+  static double widdth40 = screenWidth / 10.28;
+  static double widdth200 = screenWidth / 2.05;
+  static double widdth220 = screenWidth / 1.87;
 
   static double radius5 = screenHeight / 168.8;
   static double radius10 = screenHeight / 84.4;

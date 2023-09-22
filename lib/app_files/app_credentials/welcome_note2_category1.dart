@@ -17,7 +17,7 @@ class WelcomeNoteImage extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.transparent, // Set a transparent background
       ),
-      padding: const EdgeInsets.only(top: 50.0),
+      padding: EdgeInsets.only(top: Dimentions.heigght60),
       child: Image.asset(
         imageUrl,
       ),
@@ -36,7 +36,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
           children: [
             const WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/2.png"),
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Save Your',
               ),
@@ -48,11 +48,11 @@ class Category1WelcomeNote2 extends StatelessWidget {
             ),
             SizedBox(
                 height: Dimentions
-                    .height20), // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .heigght20), // Fixed typo: 'Dimentions' to 'Dimensions'
             Padding(
               padding: EdgeInsets.all(Dimentions
-                  .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
-              child: Column(
+                  .heigght10), // Fixed typo: 'Dimentions' to 'Dimensions'
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SmallText(
@@ -69,11 +69,11 @@ class Category1WelcomeNote2 extends StatelessWidget {
 
             SizedBox(
                 height: Dimentions
-                    .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
-            DotsIndicatorContainers(changingNumber: 1),
+                    .heigght10), // Fixed typo: 'Dimentions' to 'Dimensions'
+            const DotsIndicatorContainers(changingNumber: 1),
             SizedBox(
                 height: Dimentions
-                    .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .heigght5), // Fixed typo: 'Dimentions' to 'Dimensions'
             GestureDetector(
               onTap: () {
                 Get.toNamed(FormIntegrator.getWelcomeNote3Category1());
@@ -81,7 +81,7 @@ class Category1WelcomeNote2 extends StatelessWidget {
               child: RoundButton(
                 buttonText: 'Next',
                 buttonWidth: Dimentions
-                    .width200, // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .widdth200, // Fixed typo: 'Dimentions' to 'Dimensions'
               ),
             ),
           ],

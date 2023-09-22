@@ -17,7 +17,8 @@ class WelcomeNoteImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent, // Set a transparent background
-      padding: const EdgeInsets.only(top: 100.0, left: 40),
+      padding: EdgeInsets.only(
+          top: Dimentions.heigght100, left: Dimentions.widdth40),
       child: Center(
         child: Image.asset(
           imageUrl,
@@ -40,8 +41,8 @@ class Category1WelcomeNote3 extends StatelessWidget {
                 imageUrl: "./asset/welcome_images/category_i/3.png"),
             SizedBox(
                 height: Dimentions
-                    .height25), // Fixed typo: 'Dimentions' to 'Dimensions'
-            Center(
+                    .heigght25), // Fixed typo: 'Dimentions' to 'Dimensions'
+            const Center(
               child: WelcomeFont(
                 text: 'Allocate a study',
               ),
@@ -53,12 +54,11 @@ class Category1WelcomeNote3 extends StatelessWidget {
             ),
             SizedBox(
                 height: Dimentions
-                    .height25), // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .heigght25), // Fixed typo: 'Dimentions' to 'Dimensions'
             Padding(
               padding: EdgeInsets.all(Dimentions
-                  .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
-              child: Column(
-
+                  .heigght5), // Fixed typo: 'Dimentions' to 'Dimensions'
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SmallText(
@@ -74,13 +74,13 @@ class Category1WelcomeNote3 extends StatelessWidget {
             ),
             SizedBox(
                 height: Dimentions
-                    .height30), // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .heigght30), // Fixed typo: 'Dimentions' to 'Dimensions'
             // Add spacing between text and button
             const DotsIndicatorContainers(changingNumber: 2),
 
             SizedBox(
                 height: Dimentions
-                    .height50), // Fixed typo: 'Dimentions' to 'Dimensions'
+                    .heigght50), // Fixed typo: 'Dimentions' to 'Dimensions'
             GestureDetector(
               onTap: () {
                 Get.toNamed(FormIntegrator.getDashboard());

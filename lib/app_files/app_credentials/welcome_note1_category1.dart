@@ -15,9 +15,9 @@ class WelcomeNoteImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.transparent, // Set a transparent background
+        color: Colors.transparent, // Setted a transparent background
       ),
-      padding: const EdgeInsets.only(top: 60.0),
+      padding: EdgeInsets.only(top: Dimentions.heigght60),
       child: Image.asset(
         imageUrl,
       ),
@@ -26,7 +26,15 @@ class WelcomeNoteImage extends StatelessWidget {
 }
 
 class Category1WelcomeNote1 extends StatelessWidget {
-  const Category1WelcomeNote1({super.key});
+  late double screenHight;
+  Category1WelcomeNote1({
+    super.key,
+  });
+
+  @override
+  void initState() {
+    screenHight = Get.context!.height;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,47 +44,36 @@ class Category1WelcomeNote1 extends StatelessWidget {
           children: [
             const WelcomeNoteImage(
                 imageUrl: "./asset/welcome_images/category_i/1.png"),
-
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Search Library',
               ),
             ),
-
-            Center(
+            const Center(
               child: WelcomeFont(
                 text: 'Book Online',
               ),
             ),
-            SizedBox(
-                height: Dimentions
-                    .height25), // Fixed typo: 'Dimentions' to 'Dimensions'
+            SizedBox(height: Dimentions.heigght25),
             Padding(
-              padding: EdgeInsets.all(Dimentions
-                  .height5), // Fixed typo: 'Dimentions' to 'Dimensions'
-              child: Center(
+              padding: EdgeInsets.all(Dimentions.heigght5),
+              child: const Center(
                 child: SmallText(
                   text:
-                      'You don\'t need to search for books \nin racks anymore, just search here!', // Fixed typo: 'dont' to 'don't'
+                      'You don\'t need to search for books \nin racks anymore, just search here!',
                   maxLines: 2,
                 ),
               ),
             ),
-            SizedBox(
-                height: Dimentions
-                    .height10), // Fixed typo: 'Dimentions' to 'Dimensions'
-            DotsIndicatorContainers(changingNumber: 0),
-
+            SizedBox(height: Dimentions.heigght10),
+            const DotsIndicatorContainers(changingNumber: 0),
             const SizedBox(height: 30),
             GestureDetector(
               onTap: () {
                 Get.toNamed(FormIntegrator.getWelcomeNote2Category1());
               },
               child: RoundButton(
-                  buttonText: 'Next',
-                  buttonWidth: Dimentions
-                      .width200 // Fixed typo: 'Dimentions' to 'Dimensions'
-                  ),
+                  buttonText: 'Next', buttonWidth: Dimentions.widdth200),
             ),
           ],
         ),

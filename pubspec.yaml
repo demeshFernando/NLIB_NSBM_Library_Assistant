@@ -88,6 +88,9 @@ flutter:
     - asset/home_images/study_room/default.png
     - asset/books/default.png
     - asset/profile/default.png
+    - asset/profile/propic.jpg
+    
+    - asset/books/book_category/default.png
     - asset/books/book_category/travel.jpg
     - asset/books/book_category/biology.jpg
     - asset/books/book_category/business.jpg
@@ -101,8 +104,7 @@ flutter:
     - asset/books/book_category/philosophy.jpg
     - asset/books/book_category/astronomy.jpg
     
-    
-    
+
     
     
 
