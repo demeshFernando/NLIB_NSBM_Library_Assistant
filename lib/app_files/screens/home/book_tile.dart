@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../form_integration/form_integrater.dart';
 import '../../models/book.dart';
 
 class BookTile extends StatelessWidget {
@@ -17,6 +19,10 @@ class BookTile extends StatelessWidget {
           leading: Image.network( book.imageUrl,scale: 10.0,),
           title: Text(book.name),
           subtitle: Text(book.author),
+          onTap: (){
+            print("Navigating to DynamicBook with book: $book");
+            Get.toNamed(FormIntegrator.getDynamicBook(book),arguments: book);
+          },
         )
       )
       );

@@ -6,6 +6,8 @@ import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+import '../models/book.dart';
+
 // ignore: must_be_immutable
 class FavouriteBooks extends StatefulWidget {
   var tagFavouriteButton = <bool>[
@@ -53,7 +55,13 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
                 itemBuilder: ((context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Get.toNamed(FormIntegrator.getDynamicBook(1));
+                      Book book = Book(
+                            name: "Head First Java",
+                            author: "Bert Bates and Kathy Sierra",
+                            category: "Computer Science",
+                            description: "Head First Java is a complete learning experience in Java and object-oriented programming. With this book, you'll learn the Java language with a unique method ...",
+                            imageUrl: "https://m.media-amazon.com/images/I/61M4nbiKAdL._AC_UF1000,1000_QL80_.jpg");
+                          Get.toNamed(FormIntegrator.getDynamicBook(book),arguments: book);
                     },
                     child: Container(
                       width: double.infinity,
