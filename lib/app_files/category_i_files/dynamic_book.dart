@@ -5,28 +5,30 @@ import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dimentions.dart';
 import 'package:nlib_library_assistant/widgets/text_formatter.dart';
 
+import '../models/book.dart';
+
 class DynamicBook extends StatefulWidget {
-  final int pageId;
-  const DynamicBook({super.key, required this.pageId});
+  final Book book;
+  const DynamicBook({required this.book, Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _DynamicBookState createState() => _DynamicBookState();
 }
 
 class _DynamicBookState extends State<DynamicBook> {
   bool isClickedFavouriteButton = false;
-  Color buttonBackColor = AppColors.CONTAINER_WHITE,
-      iconColor = AppColors.ICON_GRAY;
+  Color buttonBackColor = AppColors.CONTAINER_WHITE;
+  Color iconColor = AppColors.ICON_GRAY;
 
   void stateChange() {
-    isClickedFavouriteButton = !isClickedFavouriteButton;
     setState(() {
+      isClickedFavouriteButton = !isClickedFavouriteButton;
       buttonBackColor = isClickedFavouriteButton
           ? AppColors.BUTTON_COLOR
           : AppColors.CONTAINER_WHITE;
-      iconColor =
-          isClickedFavouriteButton ? AppColors.ICON_WHITE : AppColors.ICON_GRAY;
+      iconColor = isClickedFavouriteButton
+          ? AppColors.ICON_WHITE
+          : AppColors.ICON_GRAY;
     });
   }
 
@@ -38,19 +40,20 @@ class _DynamicBookState extends State<DynamicBook> {
           SliverAppBar(
             automaticallyImplyLeading: false,
             pinned: true,
-            expandedHeight: Dimentions.height650,
+            expandedHeight: MediaQuery.of(context).size.height * 0.4,
             toolbarHeight: Dimentions.height100,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.ICON_WHITE,
-                    )),
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.ICON_WHITE,
+                  ),
+                ),
               ],
             ),
             bottom: PreferredSize(
@@ -68,7 +71,7 @@ class _DynamicBookState extends State<DynamicBook> {
                   child: SizedBox(
                     width: Dimentions.width300,
                     child: TextHeader(
-                      text: 'Harry Potter and the order of the phoenix',
+                      text: widget.book.name,
                       fontColor: AppColors.NORMAL_TEXT_COLOR,
                       maxLines: 10,
                     ),
@@ -77,9 +80,12 @@ class _DynamicBookState extends State<DynamicBook> {
               ),
             ),
             backgroundColor: AppColors.BASE_COLOR,
-            flexibleSpace: const FlexibleSpaceBar(
-                // background: Image.asset('name', width: double.maxFinite, fit: BoxFit.cover,),
-                ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                widget.book.imageUrl,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -95,11 +101,8 @@ class _DynamicBookState extends State<DynamicBook> {
                         Center(
                           child: SizedBox(
                               width: Dimentions.width300,
-                              child: const Center(
-                                child: SmallText(
-                                  text: 'by Jk rowlings',
-                                  maxLines: 3,
-                                ),
+                              child: Center(
+                                child: Text(widget.book.name),
                               )),
                         ),
                         SizedBox(height: Dimentions.height50),
@@ -127,7 +130,8 @@ class _DynamicBookState extends State<DynamicBook> {
                             borderRadius:
                                 BorderRadius.circular(Dimentions.radius20),
                             color: AppColors.CONTAINER_WHITE,
-                            border: Border.all(color: AppColors.CONTAINER_GRAY),
+                            border: Border.all(
+                                color: AppColors.CONTAINER_GRAY),
                           ),
                           child: Row(
                             children: [
@@ -143,11 +147,10 @@ class _DynamicBookState extends State<DynamicBook> {
                             ],
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: double.maxFinite,
                           child: SmallText(
-                            text:
-                                'this is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookdescription of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the bookthis is the description of the book',
+                            text: widget.book.description,
                             maxLines: 100,
                           ),
                         )
