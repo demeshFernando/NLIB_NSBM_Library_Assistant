@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nlib_library_assistant/app_files/services/auth.dart';
 import 'package:nlib_library_assistant/form_integration/form_integrater.dart';
 import 'package:nlib_library_assistant/utils/app_colors.dart';
 import 'package:nlib_library_assistant/utils/dialog_box.dart';
@@ -18,6 +19,8 @@ class Profile extends StatefulWidget {
 }
 
 class _Profile extends State<Profile> {
+
+  final AuthService _auth = AuthService();
   //default values for expansion tiles
   double containerPadding = Dimentions.height20,
       rowLeftPadding = Dimentions.width40,
@@ -68,7 +71,7 @@ class _Profile extends State<Profile> {
                     backgroundColor: AppColors.CONTAINER_WHITE,
                     child: ClipOval(
                       child: Image.asset(
-                        "asset/profile/default.png",
+                        "asset/profile/profile.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -262,10 +265,12 @@ class _Profile extends State<Profile> {
             context: context,
             title: 'Sign Out',
             description:
-                "Are you sure to sign out? because sign out may delete all the proper data implications that are finished halfly.",
-            onPressed: () {
-              Get.toNamed(FormIntegrator.getSignIn());
-            });
+                "Are you sure to sign out?",
+            onPressed: () async {
+                  await _auth.signOut();
+                  Get.toNamed(FormIntegrator.signIn);
+                },
+            );
         warningDialog.warningDialogBox();
       },
       child: Container(

@@ -76,7 +76,7 @@ class _StudyRoomSelectionState extends State<StudyRoomSelection> {
         boxShadow: const [
           BoxShadow(
             blurRadius: 1,
-            color: Colors.grey,
+            color: Colors.green,
             offset: Offset(0, 2),
           ),
         ],
