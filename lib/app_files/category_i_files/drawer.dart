@@ -73,6 +73,11 @@ class SlidDrawer extends StatelessWidget {
                   await _auth.signOut();
                   Get.toNamed(FormIntegrator.signIn);
                 },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(AppColors.BASE_COLOR),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                ),
                 child: const Text("Sign Out"),
               ),
             ),
