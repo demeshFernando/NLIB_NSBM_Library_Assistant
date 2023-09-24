@@ -27,142 +27,114 @@ class MySetting extends StatefulWidget {
 }
 
 class _MySettingState extends State<MySetting> {
- 
+  bool _allowNotifications = false; // Store the switch state
+  bool _privacyVisibility = false; // Store the privacy visibility switch state
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-         padding: EdgeInsets.only(left: 20),
-          child: Text("Herry Potter",
-        
-              
-          style: TextStyle(
-                  fontSize: 22.0,
-                  color: const Color.fromARGB(255, 255, 254, 254),
-                ),
-          ),
-        ),
-        leading: Padding(
-          padding: EdgeInsets.only(left: 30),
-          child: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context); // Add this line to handle the back navigation
-            },
-          ),
-        ),
-        
-       actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 30),
-            child: IconButton(
-              icon: Icon(
-                Icons.close,
-                color: Colors.white,
+        title: Text("Settings",
+        style: TextStyle(
+                //fontSize: 15.0,
+                color: const Color.fromARGB(255, 255, 254, 254),
               ),
-              onPressed: () {
-                // Add your close icon functionality here
-              },
-            ),
-          
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
-           
-        ],
-
-        
-        
+          onPressed: () {
+            Navigator.pop(context); // Add this line to handle the back navigation
+          },
+        ),
       ),
-       
-      
       body: Column(
-          
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 40),
-            // Add your new text widget here
-            Padding(
-              padding: EdgeInsets.only(left:40),
-              child: Text(
-                "Harry Potter and the Philosophers...",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  //color: Colors.black,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          customSwitch("Allow Notifications", _allowNotifications, (value) {
+            setState(() {
+              _allowNotifications = value;
+            });
+          }),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Any lorem word about 20 word count\nAny lorem word about 20",
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          customSwitch("Privacy Visibility", _privacyVisibility, (value) {
+            setState(() {
+              _privacyVisibility = value;
+            });
+          }),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Any lorem word about 20 word count\nAny lorem word about 20",
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          SizedBox(height: 355),
+          Align(
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              onPressed: () {
+                // Add your navigation logic here
+                // Replace Started1 with the appropriate class name in started1.dart
+              },
+              child: Text('Save settings'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 16, 101, 17),
                 ),
-                
-              ),
-              
-              
-            ),
-             Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "JK Rowling",
-              style: TextStyle(
-                fontSize: 18,
-               // fontWeight: FontWeight.bold,
-               color:  Colors.black54
-              ),
-            ),
-          ),
-            SizedBox(height:40),
-            Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "Harry Potter and the Chamber of...",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-           Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "JK Rowling",
-              style: TextStyle(
-                fontSize: 18,
-               // fontWeight: FontWeight.bold,
-               color:  Colors.black54
-              ),
-            ),
-          ),
 
-           SizedBox(height:40),
-            Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "Harry Potter and the Prisoner of...",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                minimumSize: MaterialStateProperty.all<Size>(Size(310, 52)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
               ),
             ),
           ),
-           Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "JK Rowling",
-              style: TextStyle(
-                fontSize: 18,
-               // fontWeight: FontWeight.bold,
-               color:  Colors.black54
-              ),
+        ],
+      ),
+    );
+  }
+
+  Widget customSwitch(
+      String text, bool value, void Function(bool) onChanged) {
+    return Padding(
+      padding: EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
             ),
           ),
-            // Rest of your widgets...
-          ],
-
-
-          
-        ),
-        
-      );
-      
-    
+          Switch(
+            value: value,
+            onChanged: onChanged,
+          ),
+        ],
+      ),
+    );
   }
 }
